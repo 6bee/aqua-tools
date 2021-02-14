@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata minClientVersion="4.8">
+    <id>aqua.tool.Validaton</id>
+    <version>1.0.0</version>
+    <authors>Christof Senn</authors>
+    <owners>Christof Senn</owners>
+    <copyright>Copyright © Christof Senn 2021</copyright>
+    <developmentDependency>true</developmentDependency>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="file">license.txt</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <icon>aqua-small.png</icon>
+    <projectUrl>https://github.com/6bee/aqua-tools</projectUrl>
+    <repository type="git" url="https://github.com/6bee/aqua-tools.git" />
+    <description>C# source code only package which generates extension methods for argument validation.</description>
+    <tags>c# csharp validation</tags>
+    <contentFiles>
+      <files include="**/*.cs.pp" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="**/*.*;../license.txt;../aqua-small.png" exclude="**/.*;*.nuspec" target="" />
+  </files>
+</package>
