@@ -19,7 +19,7 @@ Requires C# 8.0 or later.</description>
     <tags>c# csharp validation</tags>
     <dependencies>
       <group>
-        <dependency id="aqua.tool.Nullable" version="1.0.0" include="all" />
+        <dependency id="aqua.tool.polyfill.Nullable" version="1.0.0" include="all" />
       </group>
     </dependencies>
     <contentFiles>

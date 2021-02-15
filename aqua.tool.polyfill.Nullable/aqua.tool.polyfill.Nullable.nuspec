@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata minClientVersion="4.8">
-    <id>aqua.tool.Nullable</id>
+    <id>aqua.tool.polyfill.Nullable</id>
     <version>1.0.0</version>
     <authors>Christof Senn</authors>
     <owners>Christof Senn</owners>
