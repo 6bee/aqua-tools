@@ -13,7 +13,9 @@
     <icon>aqua-small.png</icon>
     <projectUrl>https://github.com/6bee/aqua-tools</projectUrl>
     <repository type="git" url="https://github.com/6bee/aqua-tools.git" />
-    <description>C# source code only package which generates extension methods for argument validation.</description>
+    <description>C# source code only package which generates extension methods for argument validation.
+
+Requires C# 8.0 or later.</description>
     <tags>c# csharp validation</tags>
     <dependencies>
       <group>
