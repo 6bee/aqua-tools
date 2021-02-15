@@ -3,7 +3,6 @@
 //   Copyright (c) Christof Senn. See license.txt in the package root for license information.
 // </auto-generated>
 
-#nullable enable
 #pragma warning disable
 
 namespace System.Runtime.CompilerServices
@@ -20,4 +19,3 @@ namespace System.Runtime.CompilerServices
 }
 
 #pragma warning restore
-#nullable restore

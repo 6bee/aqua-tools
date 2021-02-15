@@ -15,6 +15,11 @@
     <repository type="git" url="https://github.com/6bee/aqua-tools.git" />
     <description>C# source code only package which generates extension methods for argument validation.</description>
     <tags>c# csharp validation</tags>
+    <dependencies>
+      <group>
+        <dependency id="aqua.tool.Nullable" version="1.0.0" include="all" />
+      </group>
+    </dependencies>
     <contentFiles>
       <files include="**/*.cs.pp" />
     </contentFiles>

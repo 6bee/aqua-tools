@@ -3,7 +3,6 @@
 //   Copyright (c) Christof Senn. See license.txt in the package root for license information.
 // </auto-generated>
 
-#nullable enable
 #pragma warning disable
 
 using System;
@@ -36,8 +35,9 @@ internal static class Check
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T value,
         string name)
-        => value ?? throw new ArgumentNullException(name);
+        => ReferenceEquals(value, null)
+        ? throw new ArgumentNullException(name)
+        : value;
 }
 
 #pragma warning restore
-#nullable restore

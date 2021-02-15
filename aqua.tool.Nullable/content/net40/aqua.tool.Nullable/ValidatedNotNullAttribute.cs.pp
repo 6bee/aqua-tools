@@ -4,7 +4,6 @@
 // </auto-generated>
 
 #if !NULLABLE_ATTRIBUTES_DISABLE
-#nullable enable
 #pragma warning disable
 
 namespace System.Diagnostics.CodeAnalysis
@@ -22,5 +21,4 @@ namespace System.Diagnostics.CodeAnalysis
 }
 
 #pragma warning restore
-#nullable restore
 #endif // NULLABLE_ATTRIBUTES_DISABLE
