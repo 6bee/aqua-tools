@@ -11,7 +11,10 @@ namespace System.Diagnostics.CodeAnalysis
 {
     using System;
     using System.Diagnostics;
-
+	
+    /// <summary>
+    /// Indicates to Code Analysis that a method validates a particular parameter.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
 #if !NULLABLE_ATTRIBUTES_INCLUDE_IN_CODE_COVERAGE
     [DebuggerNonUserCode]
