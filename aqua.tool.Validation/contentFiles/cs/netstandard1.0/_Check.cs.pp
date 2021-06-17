@@ -116,38 +116,37 @@ internal static class _Check
 
         if (!items.Any())
         {
-            throw new ArgumentException($"{(items is string ? "String" : "Collection")} must not be empty.", name);
+            throw new ArgumentException("Collection must not be empty.", name);
         }
 
         return items;
     }
 
     /// <summary>
-    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
+    ///   Throws if <paramref name="value"/> is either <see langword="null"/> or empty.
     /// </summary>
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
     /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
     [MethodImpl((MethodImplOptions)AggressiveInlining)]
-    public static TCollection CheckNotNullOrEmpty<TCollection, TElement>(
+    public static string CheckNotNullOrEmpty(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
-        this TCollection? items,
+        this string? value,
         string name)
-        where TCollection : IEnumerable<TElement>
     {
-        if (items is null)
+        if (value is null)
         {
             throw new ArgumentNullException(name);
         }
 
-        if (!items.Any())
+        if (value.Length == 0)
         {
-            throw new ArgumentException($"{(items is string ? "String" : "Collection")} must not be empty.", name);
+            throw new ArgumentException("String must not be empty.", name);
         }
 
-        return items;
+        return value;
     }
 
     /// <summary>
@@ -179,42 +178,15 @@ internal static class _Check
     /// </summary>
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
+    /// <returns>The <paramref name="items"/> unless it or any element contained is <see langword="null"/>.</returns>
     [MethodImpl((MethodImplOptions)AggressiveInlining)]
     public static IEnumerable<T> CheckItemsNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IEnumerable<TElement>? items,
+        this IEnumerable<T>? items,
         string name)
-    {
-        if (items is null)
-        {
-            throw new ArgumentNullException(name);
-        }
-
-        if (items.Any(x => x is null))
-        {
-            throw new ArgumentException("Collection must not contain any null items.", name);
-        }
-
-        return items;
-    }
-
-    /// <summary>
-    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
-    /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
-    public static TCollection CheckNotNullOrEmpty<TCollection, TElement>(
-#if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
-#endif // NULLABLE_ATTRIBUTES_DISABLE
-        this TCollection? items,
-        string name)
-        where TCollection : IEnumerable<TElement>
+        where T : class
     {
         if (items is null)
         {
@@ -241,6 +213,7 @@ internal static class _Check
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
         string name)
+        where T : class
     {
         if (items is null)
         {
