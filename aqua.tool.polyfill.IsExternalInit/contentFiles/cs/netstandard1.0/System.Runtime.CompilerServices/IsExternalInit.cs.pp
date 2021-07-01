@@ -8,12 +8,14 @@
 
 namespace System.Runtime.CompilerServices
 {
+    using System.CodeDom.Compiler;
     using System.ComponentModel;
 
     /// <summary>
     /// Polyfill type for "Error CS0518 - Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not defined or imported".
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
+    [GeneratedCode("aqua.tool.polyfill.IsExternalInit", "")]
     internal sealed class IsExternalInit
     {
     }

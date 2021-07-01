@@ -7,6 +7,7 @@
 #pragma warning disable
 
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -17,6 +18,7 @@ using System.Runtime.CompilerServices;
 [EditorBrowsable(EditorBrowsableState.Never)]
 [DebuggerNonUserCode]
 [DebuggerStepThrough]
+[GeneratedCode("aqua.tool.Validation", "")]
 [SuppressMessage(
     "Major Bug",
     "S3903:Types should be defined in named namespaces",
