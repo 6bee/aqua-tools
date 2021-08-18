@@ -25,7 +25,7 @@ using System.Runtime.CompilerServices;
     Justification = "Global extension method with internal visibility.")]
 internal static class _Check
 {
-    private const int AggressiveInlining = 256;
+    private const MethodImplOptions AggressiveInlining = (MethodImplOptions)256;
 
     /// <summary>
     ///   Throws an <see cref="ArgumentNullException"/> if <paramref name="value"/> is <see langword="null"/>,
@@ -33,7 +33,7 @@ internal static class _Check
     /// </summary>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
     /// <returns>The <paramref name="value"/> unless it's <see langword="null"/>.</returns>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    [MethodImpl(AggressiveInlining)]
     public static T CheckNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
@@ -49,7 +49,7 @@ internal static class _Check
     /// </summary>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
     /// <returns>The <paramref name="value"/> unless it's <see langword="null"/>.</returns>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    [MethodImpl(AggressiveInlining)]
     public static T CheckNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
@@ -63,7 +63,7 @@ internal static class _Check
     ///   Throws an <see cref="ArgumentNullException"/> if <paramref name="value"/> is <see langword="null"/>.
     /// </summary>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    [MethodImpl(AggressiveInlining)]
     public static void AssertNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
@@ -82,7 +82,7 @@ internal static class _Check
     ///   Throws an <see cref="ArgumentNullException"/> if <paramref name="value"/> is <see langword="null"/>.
     /// </summary>
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    [MethodImpl(AggressiveInlining)]
     public static void AssertNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
@@ -103,7 +103,7 @@ internal static class _Check
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
     /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    [MethodImpl(AggressiveInlining)]
     public static IEnumerable<T> CheckNotNullOrEmpty<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
@@ -130,7 +130,7 @@ internal static class _Check
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
     /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    [MethodImpl(AggressiveInlining)]
     public static string CheckNotNullOrEmpty(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
@@ -156,7 +156,7 @@ internal static class _Check
     /// </summary>
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    [MethodImpl(AggressiveInlining)]
     public static void AssertNotNullOrEmpty<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
@@ -181,7 +181,7 @@ internal static class _Check
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
     /// <returns>The <paramref name="items"/> unless it or any element contained is <see langword="null"/>.</returns>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    [MethodImpl(AggressiveInlining)]
     public static IEnumerable<T> CheckItemsNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
@@ -208,7 +208,7 @@ internal static class _Check
     /// </summary>
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    [MethodImpl(AggressiveInlining)]
     public static void AssertItemsNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
