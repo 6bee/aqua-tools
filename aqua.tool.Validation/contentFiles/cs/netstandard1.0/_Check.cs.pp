@@ -227,6 +227,30 @@ internal static class _Check
             throw new ArgumentException("Collection must not contain any null items.", name);
         }
     }
+
+    /// <summary>
+    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/> or empty.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/> or empty.</exception>
+    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    public static void AssertItemsNotNullOrEmpty(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [ValidatedNotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this IEnumerable<string>? items,
+        string name)
+    {
+        if (items is null)
+        {
+            throw new ArgumentNullException(name);
+        }
+
+        if (items.Any(string.IsNullOrEmpty))
+        {
+            throw new ArgumentException("Collection must not contain any null or empty strings.", name);
+        }
+    }
 }
 
 #pragma warning restore
