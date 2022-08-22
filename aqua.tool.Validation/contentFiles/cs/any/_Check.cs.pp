@@ -40,23 +40,6 @@ internal static class _Check
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
         string name)
-        where T : class
-        => value ?? throw new ArgumentNullException(name);
-
-    /// <summary>
-    ///   Throws an <see cref="ArgumentNullException"/> if <paramref name="value"/> is <see langword="null"/>,
-    ///   otherwise the <paramref name="value"/> is returned.
-    /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-    /// <returns>The <paramref name="value"/> unless it's <see langword="null"/>.</returns>
-    [MethodImpl(AggressiveInlining)]
-    public static T CheckNotNull<T>(
-#if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
-#endif // NULLABLE_ATTRIBUTES_DISABLE
-        this T? value,
-        string name)
-        where T : struct
         => value ?? throw new ArgumentNullException(name);
 
     /// <summary>
@@ -70,28 +53,8 @@ internal static class _Check
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
         string name)
-        where T : class
     {
         if (value is null)
-        {
-            throw new ArgumentNullException(name);
-        }
-    }
-
-    /// <summary>
-    ///   Throws an <see cref="ArgumentNullException"/> if <paramref name="value"/> is <see langword="null"/>.
-    /// </summary>
-    /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
-    [MethodImpl(AggressiveInlining)]
-    public static void AssertNotNull<T>(
-#if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
-#endif // NULLABLE_ATTRIBUTES_DISABLE
-        this T? value,
-        string name)
-        where T : struct
-    {
-        if (!value.HasValue)
         {
             throw new ArgumentNullException(name);
         }
