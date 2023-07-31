@@ -168,6 +168,7 @@ internal static class _Check
         return dict;
     }
 
+#if NET5_0_OR_GREATER
     /// <summary>
     ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
     /// </summary>
@@ -194,6 +195,7 @@ internal static class _Check
 
         return set;
     }
+#endif // NET5_0_OR_GREATER
 
     /// <summary>
     ///   Throws if <paramref name="value"/> is either <see langword="null"/> or empty.
@@ -330,6 +332,7 @@ internal static class _Check
         return items;
     }
 
+#if NET5_0_OR_GREATER
     /// <summary>
     ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
     /// </summary>
@@ -357,6 +360,7 @@ internal static class _Check
 
         return items;
     }
+#endif // NET5_0_OR_GREATER
 
     /// <summary>
     ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
