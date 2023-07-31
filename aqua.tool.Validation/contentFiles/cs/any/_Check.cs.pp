@@ -88,6 +88,114 @@ internal static class _Check
     }
 
     /// <summary>
+    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
+    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public static IReadOnlyCollection<T> CheckNotNullOrEmpty<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [ValidatedNotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this IReadOnlyCollection<T>? items,
+        string name)
+    {
+        if (items is null)
+        {
+            throw new ArgumentNullException(name);
+        }
+
+        if (!items.Any())
+        {
+            throw new ArgumentException("Collection must not be empty.", name);
+        }
+
+        return items;
+    }
+
+    /// <summary>
+    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
+    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public static IReadOnlyList<T> CheckNotNullOrEmpty<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [ValidatedNotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this IReadOnlyList<T>? items,
+        string name)
+    {
+        if (items is null)
+        {
+            throw new ArgumentNullException(name);
+        }
+
+        if (!items.Any())
+        {
+            throw new ArgumentException("Collection must not be empty.", name);
+        }
+
+        return items;
+    }
+
+    /// <summary>
+    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
+    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public static IReadOnlyDictionary<TKey, TValue> CheckNotNullOrEmpty<TKey, TValue>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [ValidatedNotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this IReadOnlyDictionary<TKey, TValue>? dict,
+        string name)
+    {
+        if (dict is null)
+        {
+            throw new ArgumentNullException(name);
+        }
+
+        if (!dict.Any())
+        {
+            throw new ArgumentException("Collection must not be empty.", name);
+        }
+
+        return dict;
+    }
+
+    /// <summary>
+    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
+    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public static IReadOnlySet<T> CheckNotNullOrEmpty<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [ValidatedNotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this IReadOnlySet<T>? set,
+        string name)
+    {
+        if (set is null)
+        {
+            throw new ArgumentNullException(name);
+        }
+
+        if (!set.Any())
+        {
+            throw new ArgumentException("Collection must not be empty.", name);
+        }
+
+        return set;
+    }
+
+    /// <summary>
     ///   Throws if <paramref name="value"/> is either <see langword="null"/> or empty.
     /// </summary>
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
@@ -150,6 +258,90 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
+        string name)
+        where T : class
+    {
+        if (items is null)
+        {
+            throw new ArgumentNullException(name);
+        }
+
+        if (items.Any(x => x is null))
+        {
+            throw new ArgumentException("Collection must not contain any null items.", name);
+        }
+
+        return items;
+    }
+
+    /// <summary>
+    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <returns>The <paramref name="items"/> unless it or any element contained is <see langword="null"/>.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public static IReadOnlyCollection<T> CheckItemsNotNull<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [ValidatedNotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this IReadOnlyCollection<T>? items,
+        string name)
+        where T : class
+    {
+        if (items is null)
+        {
+            throw new ArgumentNullException(name);
+        }
+
+        if (items.Any(x => x is null))
+        {
+            throw new ArgumentException("Collection must not contain any null items.", name);
+        }
+
+        return items;
+    }
+
+    /// <summary>
+    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <returns>The <paramref name="items"/> unless it or any element contained is <see langword="null"/>.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public static IReadOnlyList<T> CheckItemsNotNull<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [ValidatedNotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this IReadOnlyList<T>? items,
+        string name)
+        where T : class
+    {
+        if (items is null)
+        {
+            throw new ArgumentNullException(name);
+        }
+
+        if (items.Any(x => x is null))
+        {
+            throw new ArgumentException("Collection must not contain any null items.", name);
+        }
+
+        return items;
+    }
+
+    /// <summary>
+    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <returns>The <paramref name="items"/> unless it or any element contained is <see langword="null"/>.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public static IReadOnlySet<T> CheckItemsNotNull<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [ValidatedNotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this IReadOnlySet<T>? items,
         string name)
         where T : class
     {
