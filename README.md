@@ -40,7 +40,7 @@ Existing code can easily be migrated using regex find and replace in Visual Stud
   .${method}()
   ```
 
-![migrate validation code](Resources/migrate_validation_code.png)
+  ![migrate validation code](Resources/migrate_validation_code.png)
 
 ## aqua.tool.polyfill.CallerArgumentExpression
 
