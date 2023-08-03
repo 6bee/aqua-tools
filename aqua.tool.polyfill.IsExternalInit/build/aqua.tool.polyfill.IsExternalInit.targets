@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <MSBuildAllProjects Condition=" '$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0' ">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(AquaToolPolyfillIsExternalInitDisable)' == 'true'
+                              Or '$(AquaToolPolyfillIsExternalInitDisable)' == 'yes'
+                              Or '$(AquaToolPolyfillIsExternalInitDisable)' == '1' ">$(DefineConstants);AQUA_TOOL_POLYFILL_CALLERARGUMENTEXPRESSION_DISABLE</DefineConstants>
+    <DefineConstants Condition=" '$(AquaToolPolyfillIsExternalInitPublic)' == 'true'
+                              Or '$(AquaToolPolyfillIsExternalInitPublic)' == 'yes'
+                              Or '$(AquaToolPolyfillIsExternalInitPublic)' == 'enabled'
+                              Or '$(AquaToolPolyfillIsExternalInitPublic)' == '1' ">$(DefineConstants);AQUA_TOOL_POLYFILL_CALLERARGUMENTEXPRESSION_PUBLIC</DefineConstants>
+  </PropertyGroup>
+</Project>

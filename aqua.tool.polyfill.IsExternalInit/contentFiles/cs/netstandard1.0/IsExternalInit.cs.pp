@@ -3,23 +3,34 @@
 //   Copyright (c) Christof Senn. See license.txt in the package root for license information.
 // </auto-generated>
 
+#if !AQUA_TOOL_POLYFILL_CALLERARGUMENTEXPRESSION_DISABLE
 #nullable enable
 #pragma warning disable
 
 namespace System.Runtime.CompilerServices
 {
-    using System.CodeDom.Compiler;
-    using System.ComponentModel;
+    using global::System.CodeDom.Compiler;
+    using global::System.ComponentModel;
+    using global::System.Diagnostics;
+    using global::System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Polyfill type for "Error CS0518 - Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not defined or imported".
     /// </summary>
+    [ExcludeFromCodeCoverage]
+    [DebuggerNonUserCode]
     [EditorBrowsable(EditorBrowsableState.Never)]
     [GeneratedCode("aqua.tool.polyfill.IsExternalInit", "")]
-    internal sealed class IsExternalInit
+#if AQUA_TOOL_POLYFILL_CALLERARGUMENTEXPRESSION_PUBLIC
+    public
+#else
+    internal
+#endif // AQUA_TOOL_POLYFILL_CALLERARGUMENTEXPRESSION_PUBLIC
+    sealed class IsExternalInit
     {
     }
 }
 
 #pragma warning restore
 #nullable restore
+#endif // AQUA_TOOL_POLYFILL_CALLERARGUMENTEXPRESSION_DISABLE

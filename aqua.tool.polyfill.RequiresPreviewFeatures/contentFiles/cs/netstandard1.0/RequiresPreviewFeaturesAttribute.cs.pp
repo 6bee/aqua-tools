@@ -3,6 +3,7 @@
 //   Copyright (c) Christof Senn. See license.txt in the package root for license information.
 // </auto-generated>
 
+#if !AQUA_TOOL_POLYFILL_REQUIRESPREVIEWFEATURES_DISABLE
 #nullable enable
 #pragma warning disable
 
@@ -12,17 +13,29 @@ namespace System.Runtime.Versioning
     using System.CodeDom.Compiler;
 
     /// <summary>
-    /// Polyfill type for [System.Runtime.CompilerServices.RequiresPreviewFeatures, System.Runtime].
+    /// Indicates that an API is in preview. This attribute allows call sites to be flagged with a diagnostic that indicates that a preview feature is used. Authors can use this attribute to ship preview features in their assemblies.
     /// </summary>
     [GeneratedCode("aqua.tool.polyfill.RequiresPreviewFeatures", "")]
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Delegate | AttributeTargets.Enum | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.Interface | AttributeTargets.Method | AttributeTargets.Module | AttributeTargets.Property | AttributeTargets.Struct, Inherited = false)]
-    internal sealed class RequiresPreviewFeaturesAttribute : Attribute
+#if AQUA_TOOL_POLYFILL_REQUIRESPREVIEWFEATURES_PUBLIC
+    public
+#else
+    internal
+#endif // AQUA_TOOL_POLYFILL_REQUIRESPREVIEWFEATURES_PUBLIC
+    sealed class RequiresPreviewFeaturesAttribute : Attribute
     {
-        public RequiresPreviewFeaturesAttribute ()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequiresPreviewFeaturesAttribute"/> class.
+        /// </summary>
+        public RequiresPreviewFeaturesAttribute()
         {
         }
 
-        public RequiresPreviewFeaturesAttribute (string? message)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequiresPreviewFeaturesAttribute"/> class with the specified message.
+        /// </summary>
+        /// <param name="message">An optional message associated with this attribute instance.</param>
+        public RequiresPreviewFeaturesAttribute(string? message)
         {
              Message = message;
         }
@@ -41,3 +54,4 @@ namespace System.Runtime.Versioning
 
 #pragma warning restore
 #nullable restore
+#endif // AQUA_TOOL_POLYFILL_REQUIRESPREVIEWFEATURES_DISABLE

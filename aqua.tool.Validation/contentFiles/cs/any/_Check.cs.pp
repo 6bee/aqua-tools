@@ -3,6 +3,7 @@
 //   Copyright (c) Christof Senn. See license.txt in the package root for license information.
 // </auto-generated>
 
+#if !AQUA_TOOL_VALIDATION_DISABLE
 #nullable enable
 #pragma warning disable
 
@@ -15,6 +16,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
+[ExcludeFromCodeCoverage]
 [EditorBrowsable(EditorBrowsableState.Never)]
 [DebuggerNonUserCode]
 [DebuggerStepThrough]
@@ -22,8 +24,13 @@ using System.Runtime.CompilerServices;
 [SuppressMessage(
     "Major Bug",
     "S3903:Types should be defined in named namespaces",
-    Justification = "Global extension method with internal visibility.")]
-internal static class _Check
+    Justification = "Global extension method.")]
+#if AQUA_TOOL_VALIDATION_PUBLIC
+public
+#else
+internal
+#endif // AQUA_TOOL_VALIDATION_PUBLIC
+static class _Check
 {
     private const MethodImplOptions AggressiveInlining = (MethodImplOptions)256;
 
@@ -39,7 +46,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
-        string name)
+        [CallerArgumentExpression(nameof(value))] string? name = null)
         => value ?? throw new ArgumentNullException(name);
 
     /// <summary>
@@ -52,7 +59,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
-        string name)
+        [CallerArgumentExpression(nameof(value))] string? name = null)
     {
         if (value is null)
         {
@@ -72,7 +79,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        string name)
+        [CallerArgumentExpression(nameof(items))] string? name = null)
     {
         if (items is null)
         {
@@ -99,7 +106,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyCollection<T>? items,
-        string name)
+        [CallerArgumentExpression(nameof(items))] string? name = null)
     {
         if (items is null)
         {
@@ -126,7 +133,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyList<T>? items,
-        string name)
+        [CallerArgumentExpression(nameof(items))] string? name = null)
     {
         if (items is null)
         {
@@ -153,7 +160,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyDictionary<TKey, TValue>? dict,
-        string name)
+        [CallerArgumentExpression(nameof(dict))] string? name = null)
     {
         if (dict is null)
         {
@@ -181,7 +188,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlySet<T>? set,
-        string name)
+        [CallerArgumentExpression(nameof(set))] string? name = null)
     {
         if (set is null)
         {
@@ -209,7 +216,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this string? value,
-        string name)
+        [CallerArgumentExpression(nameof(value))] string? name = null)
     {
         if (value is null)
         {
@@ -235,7 +242,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        string name)
+        [CallerArgumentExpression(nameof(items))] string? name = null)
     {
         if (items is null)
         {
@@ -260,7 +267,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        string name)
+        [CallerArgumentExpression(nameof(items))] string? name = null)
         where T : class
     {
         if (items is null)
@@ -288,7 +295,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyCollection<T>? items,
-        string name)
+        [CallerArgumentExpression(nameof(items))] string? name = null)
         where T : class
     {
         if (items is null)
@@ -316,7 +323,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyList<T>? items,
-        string name)
+        [CallerArgumentExpression(nameof(items))] string? name = null)
         where T : class
     {
         if (items is null)
@@ -345,7 +352,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlySet<T>? items,
-        string name)
+        [CallerArgumentExpression(nameof(items))] string? name = null)
         where T : class
     {
         if (items is null)
@@ -373,7 +380,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        string name)
+        [CallerArgumentExpression(nameof(items))] string? name = null)
         where T : class
     {
         if (items is null)
@@ -398,7 +405,7 @@ internal static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<string>? items,
-        string name)
+        [CallerArgumentExpression(nameof(items))] string? name = null)
     {
         if (items is null)
         {
@@ -414,3 +421,4 @@ internal static class _Check
 
 #pragma warning restore
 #nullable restore
+#endif // AQUA_TOOL_VALIDATION_DISABLE

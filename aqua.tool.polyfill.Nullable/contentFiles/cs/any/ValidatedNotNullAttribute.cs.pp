@@ -9,16 +9,15 @@
 
 namespace System.Diagnostics.CodeAnalysis
 {
-    using System;
-    using System.CodeDom.Compiler;
-    using System.Diagnostics;
+    using global::System.CodeDom.Compiler;
+    using global::System.Diagnostics;
 	
     /// <summary>
     /// Indicates to Code Analysis that a method validates a particular parameter.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
     [DebuggerNonUserCode]
     [GeneratedCode("aqua.tool.polyfill.Nullable", "")]
+    [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
     internal sealed class ValidatedNotNullAttribute : Attribute
     {
     }
