@@ -10,16 +10,16 @@
 
 ## aqua.tool.Validation
 
-Provides various extension methods that allow for argument assertiions.
+C# source code only package which generates extension methods for argument validation.
 
-Sample:
+Requires C# 10.0 or later.
 
 ``` C#
-public void Method(string argument)
+public void SampleMethod(string text)
 {
-  // Throw an ArgumentNullException if argument is null.
-  // Throw an ArgumentException if argument is empty.
-  argument.AssertNotNullOrEmpty();
+  // Throw an ArgumentNullException if text is null.
+  // Throw an ArgumentException if text is empty.
+  text.AssertNotNullOrEmpty();
 }
 ```
 
@@ -44,11 +44,31 @@ Existing code can easily be migrated using regex find and replace in Visual Stud
 
 ## aqua.tool.polyfill.CallerArgumentExpression
 
+C# source code only package which allows to use Roslyn/C# 10.0 feature to indicates that a parameter captures the expression passed for another parameter as a string.
+
+This package generats a polyfill type for `System.Runtime.CompilerServices.CallerArgumentExpressionAttribute` if not already included by target framework version.
+
+See https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute for more info.
+
 ## aqua.tool.polyfill.IsExternalInit
+
+C# source code only package which allows to use C# 9.0 'init only setters' feature targeting frameworks older than net5.0.
+
+This package generats a polyfill type to resolve "Error CS0518 - Predefined type `System.Runtime.CompilerServices.IsExternalInit` is not defined or imported".
 
 ## aqua.tool.polyfill.Nullable
 
+C# source code only package which allows to use .NET's nullable attributes and assertion method to check for null values.
+
+This package is an extension to Nullable.
+
+The C# code is only included if targeting a framework version which does not already cover nullable attributes.
+
+Requires C# 8.0 or later.
+
 ## aqua.tool.polyfill.RequiresPreviewFeatures
+
+C# source code only package which allows to use `System.Runtime.Versioning.RequiresPreviewFeaturesAttribute` targeting frameworks older than net6.0.
 
 [1]: https://buildstats.info/nuget/aqua.tool.Validation?includePreReleases=true
 [2]: http://www.nuget.org/packages/aqua.tool.Validation

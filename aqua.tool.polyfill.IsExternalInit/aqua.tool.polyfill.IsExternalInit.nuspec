@@ -13,7 +13,7 @@
     <icon>aqua-small.png</icon>
     <projectUrl>https://github.com/6bee/aqua-tools</projectUrl>
     <repository type="git" url="https://github.com/6bee/aqua-tools.git" />
-    <description>C# source code only package which allows you to use C# 9.0's 'init only setters' feature targeting frameworks older than net5.0.
+    <description>C# source code only package which allows to use C# 9.0's 'init only setters' feature targeting frameworks older than net5.0.
 
 This package generats a polyfill type to resolve "Error CS0518 - Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not defined or imported".</description>
     <tags>c# csharp init initonly init-only-setters</tags>
