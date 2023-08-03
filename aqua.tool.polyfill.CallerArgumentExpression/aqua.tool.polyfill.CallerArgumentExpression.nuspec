@@ -13,7 +13,7 @@
     <icon>aqua-small.png</icon>
     <projectUrl>https://github.com/6bee/aqua-tools</projectUrl>
     <repository type="git" url="https://github.com/6bee/aqua-tools.git" />
-    <description>C# source code only package which allows to use Roslyn/C# 10.0 feature to indicates that a parameter captures the expression passed for another parameter as a string. 
+    <description>C# source code only package which allows to use C# 10.0 feature to indicates that a parameter captures the expression passed for another parameter as a string. 
 
 This package generats a polyfill type for 'System.Runtime.CompilerServices.CallerArgumentExpressionAttribute' if not already included by target framework version.
 
