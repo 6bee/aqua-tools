@@ -18,7 +18,7 @@ namespace System.Runtime.CompilerServices
     /// </summary>
     [ExcludeFromCodeCoverage]
     [DebuggerNonUserCode]
-    [GeneratedCode("aqua.tool.polyfill.CallerArgumentExpressionAttribute", "")]
+    [GeneratedCode("aqua.tool.polyfill.CallerArgumentExpression", "")]
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
 #if AQUA_TOOL_POLYFILL_CALLERARGUMENTEXPRESSION_PUBLIC
     public
