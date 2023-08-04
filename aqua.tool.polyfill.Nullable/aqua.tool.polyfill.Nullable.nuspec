@@ -13,13 +13,13 @@
     <icon>aqua-small.png</icon>
     <projectUrl>https://github.com/6bee/aqua-tools</projectUrl>
     <repository type="git" url="https://github.com/6bee/aqua-tools.git" />
-    <description>C# source code only package which allows to use .NET's new nullable attributes and assertion method to check for null values.
+    <description>C# source code only package which allows to use .NET's nullable attributes and assertion method to check for null values.
 
 This package is an extension to https://www.nuget.org/packages/Nullable/.
 
 The C# code is only included if targeting a framework version which does not already cover nullable attributes.
 
-Requires C# 8.0 or later.</description>
+Requires C# 8 or later.</description>
     <tags>c# csharp nullable</tags>
     <dependencies>
       <group>

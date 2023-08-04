@@ -1,18 +1,20 @@
 # aqua-tools
 
-| tool                                                                                     | package                                                 |
-| :---                                                                                     | :---                                                    |
-| [aqua.tool.Validation](#aquatoolvalidation)                                              | [![NuGet Badge][1]][2] [![MyGet Pre Release][3]][4]     |
-| [aqua.tool.polyfill.CallerArgumentExpression](#aquatoolpolyfillcallerargumentexpression) | [![NuGet Badge][5]][6] [![MyGet Pre Release][7]][8]     |
-| [aqua.tool.polyfill.IsExternalInit](#aquatoolpolyfillisexternalinit)                     | [![NuGet Badge][9]][10] [![MyGet Pre Release][11]][12]  |
-| [aqua.tool.polyfill.Nullable](#aquatoolpolyfillnullable)                                 | [![NuGet Badge][13]][14] [![MyGet Pre Release][15]][16] |
-| [aqua.tool.polyfill.RequiresPreviewFeatures](#aquatoolpolyfillrequirespreviewfeatures)   | [![NuGet Badge][17]][18] [![MyGet Pre Release][19]][20] |
+| package                                                                                  | nuget                    | myget                          |
+| :---                                                                                     | :---                     | :---                           |
+| [aqua.tool.Validation](#aquatoolvalidation)                                              | [![NuGet Badge][1]][2]   | [![MyGet Pre Release][3]][4]   |
+| [aqua.tool.polyfill.CallerArgumentExpression](#aquatoolpolyfillcallerargumentexpression) | [![NuGet Badge][5]][6]   | [![MyGet Pre Release][7]][8]   |
+| [aqua.tool.polyfill.IsExternalInit](#aquatoolpolyfillisexternalinit)                     | [![NuGet Badge][9]][10]  | [![MyGet Pre Release][11]][12] |
+| [aqua.tool.polyfill.Nullable](#aquatoolpolyfillnullable)                                 | [![NuGet Badge][13]][14] | [![MyGet Pre Release][15]][16] |
+| [aqua.tool.polyfill.RequiresPreviewFeatures](#aquatoolpolyfillrequirespreviewfeatures)   | [![NuGet Badge][17]][18] | [![MyGet Pre Release][19]][20] |
 
 ## aqua.tool.Validation
 
 C# source code only package which generates extension methods for argument validation.
 
-Requires C# 10.0 or later.
+Requires C# 10 or later.
+
+### Sample
 
 ``` C#
 public void SampleMethod(string text)
@@ -28,13 +30,13 @@ public void SampleMethod(string text)
 Starting with _aqua.tool.Validation v2.2.0_ the name argument can be omitted as it's atomatically injected by the compiler.
 Existing code can easily be migrated using regex find and replace in Visual Studio:
 
-- search regex pattern:
+- Search regex pattern:
 
   ```RegEx
   \.(?<method>((Assert)|(Check))(Items)?NotNull(OrEmpty)?)\(((nameof\([^\)]+\))|([^\)]+))\)
   ```
 
-- replace regex pattern:
+- Replace regex pattern:
 
   ```RegEx
   .${method}()
@@ -44,7 +46,7 @@ Existing code can easily be migrated using regex find and replace in Visual Stud
 
 ## aqua.tool.polyfill.CallerArgumentExpression
 
-C# source code only package which allows to use Roslyn/C# 10.0 feature to indicates that a parameter captures the expression passed for another parameter as a string.
+C# source code only package which allows to use C# 10 feature to indicates that a parameter captures the expression passed for another parameter as a string.
 
 This package generats a polyfill type for `System.Runtime.CompilerServices.CallerArgumentExpressionAttribute` if not already included by target framework version.
 
@@ -52,23 +54,25 @@ See https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices
 
 ## aqua.tool.polyfill.IsExternalInit
 
-C# source code only package which allows to use C# 9.0 'init only setters' feature targeting frameworks older than net5.0.
+C# source code only package which allows to use C# 9 'init only setters' feature targeting frameworks older than .NET 5.0.
 
 This package generats a polyfill type to resolve "Error CS0518 - Predefined type `System.Runtime.CompilerServices.IsExternalInit` is not defined or imported".
+
+See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/init for more info.
 
 ## aqua.tool.polyfill.Nullable
 
 C# source code only package which allows to use .NET's nullable attributes and assertion method to check for null values.
 
-This package is an extension to Nullable.
+This package is an extension to https://www.nuget.org/packages/Nullable/.
 
 The C# code is only included if targeting a framework version which does not already cover nullable attributes.
 
-Requires C# 8.0 or later.
+Requires C# 8 or later.
 
 ## aqua.tool.polyfill.RequiresPreviewFeatures
 
-C# source code only package which allows to use `System.Runtime.Versioning.RequiresPreviewFeaturesAttribute` targeting frameworks older than net6.0.
+C# source code only package which allows to use `System.Runtime.Versioning.RequiresPreviewFeaturesAttribute` targeting frameworks older than .NET 6.0.
 
 [1]: https://buildstats.info/nuget/aqua.tool.Validation?includePreReleases=true
 [2]: http://www.nuget.org/packages/aqua.tool.Validation
