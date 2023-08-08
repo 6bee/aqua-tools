@@ -441,7 +441,7 @@ static class _Check
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IEnumerable<string>? items,
+        this IEnumerable<string?>? items,
         [CallerArgumentExpression("items")] string? name = null)
     {
         if (items is null)
