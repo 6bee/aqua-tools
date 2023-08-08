@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata minClientVersion="4.8">
     <id>aqua.tool.polyfill.RequiresPreviewFeatures</id>
-    <version>2.2.1</version>
+    <version>2.2.2</version>
     <authors>Christof Senn</authors>
     <owners>Christof Senn</owners>
     <copyright>Copyright © Christof Senn 2022</copyright>
@@ -13,7 +13,9 @@
     <icon>aqua-small.png</icon>
     <projectUrl>https://github.com/6bee/aqua-tools</projectUrl>
     <repository type="git" url="https://github.com/6bee/aqua-tools.git" />
-    <description>C# source code only package which allows to use System.Runtime.Versioning.RequiresPreviewFeaturesAttribute targeting frameworks older than .NET 6.0.</description>
+    <description>C# source code only package which allows to use System.Runtime.Versioning.RequiresPreviewFeaturesAttribute targeting frameworks older than .NET 6.0.
+
+Package [documentation](https://github.com/6bee/aqua-tools/tree/v2.2.2#aquatoolpolyfillrequirespreviewfeatures) on github.</description>
     <tags>c# csharp RequiresPreviewFeatures</tags>
     <contentFiles>
       <files include="**/*.cs.pp" />

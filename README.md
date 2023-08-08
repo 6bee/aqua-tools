@@ -14,7 +14,7 @@ C# source code only package which generates extension methods for argument valid
 
 Requires C# 10 or later.
 
-### Sample
+### How to Use
 
 ``` C#
 public void SampleMethod(string text)
