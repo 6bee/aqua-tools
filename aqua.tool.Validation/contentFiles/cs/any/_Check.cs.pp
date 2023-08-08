@@ -46,7 +46,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
-        [CallerArgumentExpression(nameof(value))] string? name = null)
+        [CallerArgumentExpression("value")] string? name = null)
         where T : struct
         => value ?? throw new ArgumentNullException(name);
 
@@ -62,7 +62,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
-        [CallerArgumentExpression(nameof(value))] string? name = null)
+        [CallerArgumentExpression("value")] string? name = null)
         where T : class
         => value ?? throw new ArgumentNullException(name);
 
@@ -76,7 +76,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
-        [CallerArgumentExpression(nameof(value))] string? name = null)
+        [CallerArgumentExpression("value")] string? name = null)
         where T : struct
     {
         if (value is null)
@@ -95,7 +95,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
-        [CallerArgumentExpression(nameof(value))] string? name = null)
+        [CallerArgumentExpression("value")] string? name = null)
         where T : class
     {
         if (value is null)
@@ -116,7 +116,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        [CallerArgumentExpression(nameof(items))] string? name = null)
+        [CallerArgumentExpression("items")] string? name = null)
     {
         if (items is null)
         {
@@ -143,7 +143,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyCollection<T>? items,
-        [CallerArgumentExpression(nameof(items))] string? name = null)
+        [CallerArgumentExpression("items")] string? name = null)
     {
         if (items is null)
         {
@@ -170,7 +170,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyList<T>? items,
-        [CallerArgumentExpression(nameof(items))] string? name = null)
+        [CallerArgumentExpression("items")] string? name = null)
     {
         if (items is null)
         {
@@ -197,7 +197,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyDictionary<TKey, TValue>? dict,
-        [CallerArgumentExpression(nameof(dict))] string? name = null)
+        [CallerArgumentExpression("dict")] string? name = null)
     {
         if (dict is null)
         {
@@ -225,7 +225,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlySet<T>? set,
-        [CallerArgumentExpression(nameof(set))] string? name = null)
+        [CallerArgumentExpression("set")] string? name = null)
     {
         if (set is null)
         {
@@ -253,7 +253,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this string? value,
-        [CallerArgumentExpression(nameof(value))] string? name = null)
+        [CallerArgumentExpression("value")] string? name = null)
     {
         if (value is null)
         {
@@ -279,7 +279,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        [CallerArgumentExpression(nameof(items))] string? name = null)
+        [CallerArgumentExpression("items")] string? name = null)
     {
         if (items is null)
         {
@@ -304,7 +304,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        [CallerArgumentExpression(nameof(items))] string? name = null)
+        [CallerArgumentExpression("items")] string? name = null)
         where T : class
     {
         if (items is null)
@@ -332,7 +332,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyCollection<T>? items,
-        [CallerArgumentExpression(nameof(items))] string? name = null)
+        [CallerArgumentExpression("items")] string? name = null)
         where T : class
     {
         if (items is null)
@@ -360,7 +360,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyList<T>? items,
-        [CallerArgumentExpression(nameof(items))] string? name = null)
+        [CallerArgumentExpression("items")] string? name = null)
         where T : class
     {
         if (items is null)
@@ -389,7 +389,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlySet<T>? items,
-        [CallerArgumentExpression(nameof(items))] string? name = null)
+        [CallerArgumentExpression("items")] string? name = null)
         where T : class
     {
         if (items is null)
@@ -417,7 +417,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        [CallerArgumentExpression(nameof(items))] string? name = null)
+        [CallerArgumentExpression("items")] string? name = null)
         where T : class
     {
         if (items is null)
@@ -442,7 +442,7 @@ static class _Check
         [ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<string>? items,
-        [CallerArgumentExpression(nameof(items))] string? name = null)
+        [CallerArgumentExpression("items")] string? name = null)
     {
         if (items is null)
         {
