@@ -46,9 +46,9 @@ Existing code can easily be migrated using regex find and replace in Visual Stud
 
 ## aqua.tool.polyfill.CallerArgumentExpression
 
-C# source code only package which allows to use C# 10 feature to indicates that a parameter captures the expression passed for another parameter as a string.
+C# source code only package which allows to use C# 10 feature to indicate that a parameter captures the expression passed for another parameter as a string.
 
-This package generats a polyfill type for `System.Runtime.CompilerServices.CallerArgumentExpressionAttribute` if not already included by target framework version.
+This package generats a polyfill type for `System.Runtime.CompilerServices.CallerArgumentExpressionAttribute` if not already included by target framework version (.NET Core 3.0 and later).
 
 See https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute for more info.
 
@@ -62,7 +62,9 @@ See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals
 
 ## aqua.tool.polyfill.Nullable
 
-C# source code only package which allows to use .NET's nullable attributes and assertion method to check for null values.
+C# source code only package which allows to use .NET's nullable attributes targeting frameworks older than .NET 5.0.
+
+Nullable attributes are used by the compiler to provide warnings when you may dereference a null value, throwing a `System.NullReferenceException`.
 
 This package is an extension to https://www.nuget.org/packages/Nullable/.
 
@@ -70,9 +72,13 @@ The C# code is only included if targeting a framework version which does not alr
 
 Requires C# 8 or later.
 
+See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis for more info.
+
 ## aqua.tool.polyfill.RequiresPreviewFeatures
 
 C# source code only package which allows to use `System.Runtime.Versioning.RequiresPreviewFeaturesAttribute` targeting frameworks older than .NET 6.0.
+
+See https://learn.microsoft.com/en-us/dotnet/api/system.runtime.versioning.requirespreviewfeaturesattribute for more info.
 
 [1]: https://buildstats.info/nuget/aqua.tool.Validation?includePreReleases=true
 [2]: http://www.nuget.org/packages/aqua.tool.Validation
