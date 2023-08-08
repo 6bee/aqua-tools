@@ -43,7 +43,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static T CheckNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
         [CallerArgumentExpression("value")] string? name = null)
@@ -59,7 +59,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static T CheckNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
         [CallerArgumentExpression("value")] string? name = null)
@@ -73,7 +73,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static void AssertNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
         [CallerArgumentExpression("value")] string? name = null)
@@ -92,7 +92,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static void AssertNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
         [CallerArgumentExpression("value")] string? name = null)
@@ -113,7 +113,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static IEnumerable<T> CheckNotNullOrEmpty<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
         [CallerArgumentExpression("items")] string? name = null)
@@ -140,7 +140,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static IReadOnlyCollection<T> CheckNotNullOrEmpty<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyCollection<T>? items,
         [CallerArgumentExpression("items")] string? name = null)
@@ -167,7 +167,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static IReadOnlyList<T> CheckNotNullOrEmpty<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyList<T>? items,
         [CallerArgumentExpression("items")] string? name = null)
@@ -194,7 +194,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static IReadOnlyDictionary<TKey, TValue> CheckNotNullOrEmpty<TKey, TValue>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyDictionary<TKey, TValue>? dict,
         [CallerArgumentExpression("dict")] string? name = null)
@@ -222,7 +222,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static IReadOnlySet<T> CheckNotNullOrEmpty<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlySet<T>? set,
         [CallerArgumentExpression("set")] string? name = null)
@@ -250,7 +250,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static string CheckNotNullOrEmpty(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this string? value,
         [CallerArgumentExpression("value")] string? name = null)
@@ -276,7 +276,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static void AssertNotNullOrEmpty<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
         [CallerArgumentExpression("items")] string? name = null)
@@ -301,7 +301,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static IEnumerable<T> CheckItemsNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
         [CallerArgumentExpression("items")] string? name = null)
@@ -329,7 +329,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static IReadOnlyCollection<T> CheckItemsNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyCollection<T>? items,
         [CallerArgumentExpression("items")] string? name = null)
@@ -357,7 +357,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static IReadOnlyList<T> CheckItemsNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyList<T>? items,
         [CallerArgumentExpression("items")] string? name = null)
@@ -386,7 +386,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static IReadOnlySet<T> CheckItemsNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlySet<T>? items,
         [CallerArgumentExpression("items")] string? name = null)
@@ -414,7 +414,7 @@ static class _Check
     [MethodImpl(AggressiveInlining)]
     public static void AssertItemsNotNull<T>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
         [CallerArgumentExpression("items")] string? name = null)
@@ -439,7 +439,7 @@ static class _Check
     [MethodImpl((MethodImplOptions)AggressiveInlining)]
     public static void AssertItemsNotNullOrEmpty(
 #if !NULLABLE_ATTRIBUTES_DISABLE
-        [ValidatedNotNull]
+        [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<string?>? items,
         [CallerArgumentExpression("items")] string? name = null)
