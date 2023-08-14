@@ -25,7 +25,7 @@ Requires C# 8 or later.
 
 See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis for more info.
 
-Package documentation on github: https://github.com/6bee/aqua-tools/tree/v2.2.4#aquatoolpolyfillnullable</description>
+Package documentation on github: https://github.com/6bee/aqua-tools/tree/v2.2.5#aquatoolpolyfillnullable</description>
     <tags>c# csharp nullable</tags>
     <dependencies>
       <group>

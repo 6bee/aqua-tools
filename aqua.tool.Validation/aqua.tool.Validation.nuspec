@@ -17,7 +17,7 @@
 
 Requires C# 10 or later.
 
-Package documentation on github: https://github.com/6bee/aqua-tools/tree/v2.2.4#aquatoolvalidation</description>
+Package documentation on github: https://github.com/6bee/aqua-tools/tree/v2.2.5#aquatoolvalidation</description>
     <tags>c# csharp validation</tags>
     <dependencies>
       <group>

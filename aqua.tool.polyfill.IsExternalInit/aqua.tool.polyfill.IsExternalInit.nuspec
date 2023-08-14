@@ -19,7 +19,7 @@ This package generats a polyfill type to resolve "Error CS0518 - Predefined type
 
 See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/init for more info.
 
-Package documentation on github: https://github.com/6bee/aqua-tools/tree/v2.2.4#aquatoolpolyfillisexternalinit</description>
+Package documentation on github: https://github.com/6bee/aqua-tools/tree/v2.2.5#aquatoolpolyfillisexternalinit</description>
     <tags>c# csharp init initonly init-only-setters</tags>
     <contentFiles>
       <files include="**/*.cs.pp" />

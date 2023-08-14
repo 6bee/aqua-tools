@@ -21,7 +21,7 @@ Requires C# 10 or later.
 
 See https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute for more info.
 
-Package documentation on github: https://github.com/6bee/aqua-tools/tree/v2.2.4#aquatoolpolyfillcallerargumentexpression</description>
+Package documentation on github: https://github.com/6bee/aqua-tools/tree/v2.2.5#aquatoolpolyfillcallerargumentexpression</description>
     <tags>c# csharp polyfill CallerArgumentExpressionAttribute</tags>
     <contentFiles>
       <files include="**/*.cs.pp" />
