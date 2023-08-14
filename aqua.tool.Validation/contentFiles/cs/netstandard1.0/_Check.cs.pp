@@ -269,11 +269,11 @@ static class _Check
     }
 
     /// <summary>
-    ///   Throws if <paramref name="value"/> is either <see langword="null"/> or empty.
+    ///   Throws if <paramref name="value"/> is either <see langword="null"/> or white space.
     /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
-    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
+    /// <exception cref="ArgumentNullException">If <paramref name="value"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="value"/> is white space.</exception>
+    /// <returns>The <paramref name="value"/> unless it's <see langword="null"/> or white space.</returns>
     [MethodImpl(AggressiveInlining)]
     public static string CheckNotNullOrWhiteSpace(
 #if !NULLABLE_ATTRIBUTES_DISABLE
@@ -320,12 +320,12 @@ static class _Check
     }
 
     /// <summary>
-    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
+    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or white space.
     /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
+    /// <exception cref="ArgumentNullException">If <paramref name="value"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="value"/> is white space.</exception>
     [MethodImpl(AggressiveInlining)]
-    public static void AssertNotNullOrWhiteSpace<T>(
+    public static void AssertNotNullOrWhiteSpace(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [NotNull][ValidatedNotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
@@ -510,7 +510,7 @@ static class _Check
     ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/> or white space.
     /// </summary>
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/> or empty.</exception>
+    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/> or white space.</exception>
     [MethodImpl((MethodImplOptions)AggressiveInlining)]
     public static void AssertItemsNotNullOrWhiteSpace(
 #if !NULLABLE_ATTRIBUTES_DISABLE
@@ -526,7 +526,7 @@ static class _Check
 
         if (items.Any(string.IsNullOrWhiteSpace))
         {
-            throw new ArgumentException("Collection must not contain any null or empty strings.", name);
+            throw new ArgumentException("Collection must not contain any null or white space strings.", name);
         }
     }
 }
