@@ -269,6 +269,33 @@ static class _Check
     }
 
     /// <summary>
+    ///   Throws if <paramref name="value"/> is either <see langword="null"/> or empty.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
+    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
+    [MethodImpl(AggressiveInlining)]
+    public static string CheckNotNullOrWhiteSpace(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull][ValidatedNotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this string? value,
+        [CallerArgumentExpression("value")] string? name = null)
+    {
+        if (value is null)
+        {
+            throw new ArgumentNullException(name);
+        }
+
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException("String must not be empty or white space.", name);
+        }
+
+        return value;
+    }
+
+    /// <summary>
     ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
     /// </summary>
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
@@ -289,6 +316,30 @@ static class _Check
         if (!items.Any())
         {
             throw new ArgumentException($"{(items is string ? "String" : "Collection")} must not be empty.", name);
+        }
+    }
+
+    /// <summary>
+    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
+    [MethodImpl(AggressiveInlining)]
+    public static void AssertNotNullOrWhiteSpace<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull][ValidatedNotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this string? value,
+        [CallerArgumentExpression("value")] string? name = null)
+    {
+        if (value is null)
+        {
+            throw new ArgumentNullException(name);
+        }
+
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            throw new ArgumentException("String must not be empty or white space.", name);
         }
     }
 
