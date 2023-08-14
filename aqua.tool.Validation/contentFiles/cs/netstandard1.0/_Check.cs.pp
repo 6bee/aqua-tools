@@ -505,6 +505,30 @@ static class _Check
             throw new ArgumentException("Collection must not contain any null or empty strings.", name);
         }
     }
+
+    /// <summary>
+    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/> or white space.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/> or empty.</exception>
+    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    public static void AssertItemsNotNullOrWhiteSpace(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull][ValidatedNotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this IEnumerable<string?>? items,
+        [CallerArgumentExpression("items")] string? name = null)
+    {
+        if (items is null)
+        {
+            throw new ArgumentNullException(name);
+        }
+
+        if (items.Any(string.IsNullOrWhiteSpace))
+        {
+            throw new ArgumentException("Collection must not contain any null or empty strings.", name);
+        }
+    }
 }
 
 #pragma warning restore
