@@ -25,6 +25,7 @@ using System.Runtime.CompilerServices;
     "Major Bug",
     "S3903:Types should be defined in named namespaces",
     Justification = "Global extension method.")]
+[StackTraceHidden]
 #if AQUA_TOOL_VALIDATION_PUBLIC
 public
 #else
