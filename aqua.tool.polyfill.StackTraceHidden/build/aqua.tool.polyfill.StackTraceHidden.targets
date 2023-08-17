@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <MSBuildAllProjects Condition=" '$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0' ">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(AquaToolPolyfillStackTraceHiddenDisable)' == 'true'
+                              Or '$(AquaToolPolyfillStackTraceHiddenDisable)' == 'yes'
+                              Or '$(AquaToolPolyfillStackTraceHiddenDisable)' == '1' ">$(DefineConstants);AQUA_TOOL_POLYFILL_STACKTRACEHIDDEN_DISABLE</DefineConstants>
+    <DefineConstants Condition=" '$(AquaToolPolyfillStackTraceHiddenPublic)' == 'true'
+                              Or '$(AquaToolPolyfillStackTraceHiddenPublic)' == 'yes'
+                              Or '$(AquaToolPolyfillStackTraceHiddenPublic)' == 'enabled'
+                              Or '$(AquaToolPolyfillStackTraceHiddenPublic)' == '1' ">$(DefineConstants);AQUA_TOOL_POLYFILL_STACKTRACEHIDDEN_PUBLIC</DefineConstants>
+  </PropertyGroup>
+</Project>

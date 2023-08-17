@@ -7,6 +7,7 @@
 | [aqua.tool.polyfill.IsExternalInit](#aquatoolpolyfillisexternalinit)                     | [![NuGet Badge][9]][10]  | [![MyGet Pre Release][11]][12] |
 | [aqua.tool.polyfill.Nullable](#aquatoolpolyfillnullable)                                 | [![NuGet Badge][13]][14] | [![MyGet Pre Release][15]][16] |
 | [aqua.tool.polyfill.RequiresPreviewFeatures](#aquatoolpolyfillrequirespreviewfeatures)   | [![NuGet Badge][17]][18] | [![MyGet Pre Release][19]][20] |
+| [aqua.tool.polyfill.StackTraceHidden](#aquatoolpolyfillstacktracehidden)                 | [![NuGet Badge][21]][22] | [![MyGet Pre Release][23]][24] |
 
 ## aqua.tool.Validation
 
@@ -38,7 +39,7 @@ Most validation methods exists in two flavors. While _assert_ simply verifies th
 
 ### Validation Compiler Options
 
-Compiler options allow to modify some generated code features. Properies can be defined as MSBuild properties typically within a `<PropertyGroup>` in *.csproj file-
+Compiler options allow to modify some generated code features. Properies can be defined as MSBuild properties typically within a `<PropertyGroup>` in *.csproj file.
 
 | Property | Value | Description |
 | :--- | :--- | :--- |
@@ -74,7 +75,7 @@ See https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices
 
 ### CallerArgumentExpression Compiler Options
 
-Compiler options allow to modify some generated code features. Properies can be defined as MSBuild properties typically within a `<PropertyGroup>` in *.csproj file-
+Compiler options allow to modify some generated code features. Properies can be defined as MSBuild properties typically within a `<PropertyGroup>` in *.csproj file.
 
 | Property | Value | Description |
 | :--- | :--- | :--- |
@@ -90,7 +91,7 @@ See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals
 
 ### IsExternalInit Compiler Options
 
-Compiler options allow to modify some generated code features. Properies can be defined as MSBuild properties typically within a `<PropertyGroup>` in *.csproj file-
+Compiler options allow to modify some generated code features. Properies can be defined as MSBuild properties typically within a `<PropertyGroup>` in *.csproj file.
 
 | Property | Value | Description |
 | :--- | :--- | :--- |
@@ -113,7 +114,7 @@ See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attribute
 
 ### Nullable Compiler Options
 
-Compiler options allow to modify some generated code features. Properies can be defined as MSBuild properties typically within a `<PropertyGroup>` in *.csproj file-
+Compiler options allow to modify some generated code features. Properies can be defined as MSBuild properties typically within a `<PropertyGroup>` in *.csproj file.
 
 | Property | Value | Description |
 | :--- | :--- | :--- |
@@ -127,12 +128,27 @@ See https://learn.microsoft.com/en-us/dotnet/api/system.runtime.versioning.requi
 
 ### RequiresPreviewFeatures Compiler Options
 
-Compiler options allow to modify some generated code features. Properies can be defined as MSBuild properties typically within a `<PropertyGroup>` in *.csproj file-
+Compiler options allow to modify some generated code features. Properies can be defined as MSBuild properties typically within a `<PropertyGroup>` in *.csproj file.
 
 | Property | Value | Description |
 | :--- | :--- | :--- |
 | `AquaToolPolyfillRequiresPreviewFeaturesDisable` | true\|false | Disable compilation of generated source code. |
 | `AquaToolPolyfillRequiresPreviewFeaturesPublic` | true\|false | Declare generated source code as public. By default, generated source code has internal visibility. |
+
+## aqua.tool.polyfill.StackTraceHidden
+
+This package generats a polyfill type for `System.Diagnostics.StackTraceHiddenAttribute` if not already included by target framework version (.NET 6 and later).
+
+See https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.stacktracehiddenattribute for more info.
+
+### StackTraceHidden Compiler Options
+
+Compiler options allow to modify some generated code features. Properies can be defined as MSBuild properties typically within a `<PropertyGroup>` in *.csproj file.
+
+| Property | Value | Description |
+| :--- | :--- | :--- |
+| `AquaToolPolyfillStackTraceHiddenDisable` | true\|false | Disable compilation of generated source code. |
+| `AquaToolPolyfillStackTraceHiddenPublic` | true\|false | Declare generated source code as public. By default, generated source code has internal visibility. |
 
 [1]: https://buildstats.info/nuget/aqua.tool.Validation?includePreReleases=true
 [2]: http://www.nuget.org/packages/aqua.tool.Validation
@@ -158,3 +174,8 @@ Compiler options allow to modify some generated code features. Properies can be 
 [18]: http://www.nuget.org/packages/aqua.tool.polyfill.RequiresPreviewFeatures
 [19]: http://img.shields.io/myget/aqua/vpre/aqua.tool.polyfill.RequiresPreviewFeatures.svg?style=flat-square&label=myget
 [20]: https://www.myget.org/feed/aqua/package/nuget/aqua.tool.polyfill.RequiresPreviewFeatures
+
+[21]: https://buildstats.info/nuget/aqua.tool.polyfill.StackTraceHidden?includePreReleases=true
+[22]: http://www.nuget.org/packages/aqua.tool.polyfill.StackTraceHidden
+[23]: http://img.shields.io/myget/aqua/vpre/aqua.tool.polyfill.StackTraceHidden.svg?style=flat-square&label=myget
+[24]: https://www.myget.org/feed/aqua/package/nuget/aqua.tool.polyfill.StackTraceHidden
