@@ -1,0 +1,41 @@
+<Project>
+
+  <PropertyGroup Label="Version">
+    <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">3.0.0</VersionPrefix>
+    <VersionSuffix Condition=" '$(VersionSuffix)' == '' "></VersionSuffix>
+  </PropertyGroup>
+
+  <PropertyGroup Label="General Properties">
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GeneratePackageOnBuild Condition=" '$(GeneratePackageOnBuild)' == '' and '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)artifacts/</PackageOutputPath>
+    <!--
+      Enable the compiler strict mode (see https://www.meziantou.net/csharp-compiler-strict-mode.htm).
+      This (poorly documented) mode enables additional warnings for incorrect usages of some features.
+      For instance, this will warn when using the == operator to compare a struct with a null literal.
+    -->
+    <Features>strict</Features>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package Metadata">
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/6bee/aqua-tools</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/6bee/aqua-tools.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageIcon>aqua-small.png</PackageIcon>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <Authors>Christof Senn</Authors>
+  </PropertyGroup>
+
+  <ItemGroup Label="Common Package References">
+    <PackageReference Include="PolySharp" Version="1.13.2" Pack="false" />
+  </ItemGroup>
+
+  <ItemGroup Label="Common Package Files">
+    <None Include="$(MSBuildThisFileDirectory)aqua-small.png" PackagePath="\" Pack="true" />
+  </ItemGroup>
+
+</Project>

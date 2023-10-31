@@ -1,21 +1,26 @@
 @echo off
 
-call :prepare
-
+call :clean
 echo.
 
-if "%1" neq "" (
-  for %%I in (%*) do call :pack "%%I"
-) else (
-  for /r "%~dp0" %%d in (*.nuspec) do call :pack "%%d"
-)
-
+echo pack projects
+dotnet build aqua.tool.Validation -c Release
 echo.
+
+::echo pack nuspec files
+::if "%1" neq "" (
+::  for %%I in (%*) do call :pack "%%I"
+::) else (
+::  for /r "%~dp0" %%d in (*.nuspec) do call :pack "%%d"
+::)
+::echo.
+
 echo done.
 pause
 goto :eof
 
 :pack
+call :prepare
 echo pack %~1
 "%~dp0.tools\NuGet.exe" pack "%~1" -OutputDirectory "%~dp0artifacts" >>"%~dp0pack.log"
 set resultcode=%errorlevel%
@@ -26,10 +31,6 @@ if %resultcode% neq 0 (
 exit /b %resultcode% 
 
 :prepare
-echo.
-echo clean
-del /q "%~dp0pack.log" 2>nul
-
 if not exist "%~dp0.tools\nuget.exe" (
   echo download nuget cmd tool
   md "%~dp0.tools\temp\"
@@ -40,3 +41,8 @@ if not exist "%~dp0.tools\nuget.exe" (
 )
 echo.
 exit /b 0
+
+:clean
+echo.
+echo clean
+del /q "%~dp0pack.log" 2>nul

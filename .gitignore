@@ -1,3 +1,7 @@
+[Oo]bj/
+[Bb]in/
 .tools/
+.vs/
 artifacts/
 *.log
+*.binlog

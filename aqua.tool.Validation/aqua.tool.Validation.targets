@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <MSBuildAllProjects Condition=" '$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0' ">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PolySharpIncludeRuntimeSupportedAttributes Condition=" '$(PolySharpIncludeRuntimeSupportedAttributes)' == '' ">true</PolySharpIncludeRuntimeSupportedAttributes>
+    <DefineConstants Condition=" '$(AquaToolValidationDisable)' == 'true'
+                              Or '$(AquaToolValidationDisable)' == 'yes'
+                              Or '$(AquaToolValidationDisable)' == '1' ">$(DefineConstants);AQUA_TOOL_VALIDATION_DISABLE</DefineConstants>
+    <DefineConstants Condition=" '$(AquaToolValidationPublic)' == 'true'
+                              Or '$(AquaToolValidationPublic)' == 'yes'
+                              Or '$(AquaToolValidationPublic)' == 'enabled'
+                              Or '$(AquaToolValidationPublic)' == '1' ">$(DefineConstants);AQUA_TOOL_VALIDATION_PUBLIC</DefineConstants>
+    <DefineConstants Condition=" '$(AquaToolValidationNullableDisable)' == 'true'
+                              Or '$(AquaToolValidationNullableDisable)' == 'yes'
+                              Or '$(AquaToolValidationNullableDisable)' == '1' ">$(DefineConstants);NULLABLE_ATTRIBUTES_DISABLE</DefineConstants>
+  </PropertyGroup>
+</Project>

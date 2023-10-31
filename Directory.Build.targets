@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <Target Name="SetSourceRevisionId" BeforeTargets="PreBuildEvent">
+    <PropertyGroup>
+      <SourceRevisionCommand Condition=" '$(SourceRevisionCommand)' == '' ">git describe --long --always --dirty --exclude=* --abbrev=8</SourceRevisionCommand>
+    </PropertyGroup>
+    <Exec Command="$(SourceRevisionCommand)" ConsoleToMSBuild="true" EchoOff="true" IgnoreExitCode="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="SourceRevisionInfo" />
+      <Output TaskParameter="ExitCode" PropertyName="SourceRevisionExitCode"/>
+    </Exec>
+    <PropertyGroup>
+      <SourceRevisionId Condition=" '$(SourceRevisionExitCode)' == '0' ">$(SourceRevisionInfo)</SourceRevisionId>
+    </PropertyGroup>
+    <Warning Condition=" '$(SourceRevisionExitCode)' != '0' " Text="Failed to retireve source revision" />
+    <Message Condition=" '$(SourceRevisionExitCode)' == '0' " Text="Updated SourceRevisionId: $(SourceRevisionId)" />
+  </Target>
+  <Target Name="SetSourceRevisionDateAsBuildDate" BeforeTargets="PreBuildEvent">
+    <PropertyGroup>
+      <SourceRevisionDateCommand Condition=" '$(SourceRevisionDateCommand)' == '' ">git log -1 --format=%%aI</SourceRevisionDateCommand>
+    </PropertyGroup>
+    <Exec Command="$(SourceRevisionDateCommand)" ConsoleToMSBuild="true" EchoOff="true" IgnoreExitCode="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="SourceRevisionDate" />
+      <Output TaskParameter="ExitCode" PropertyName="SourceRevisionDateExitCode"/>
+    </Exec>
+    <PropertyGroup>
+      <_BuildDate Condition=" '$(SourceRevisionDateExitCode)' == '0' ">$(SourceRevisionDate)</_BuildDate>
+      <_BuildDate Condition=" '$(SourceRevisionDateExitCode)' != '0' ">$([System.DateTime]::Now.ToString("o"))</_BuildDate>
+      <_BuildYear>$([System.DateTime]::Parse($(_BuildDate)).Year)</_BuildYear>
+    </PropertyGroup>
+    <Warning Condition=" '$(SourceRevisionDateExitCode)' != '0' " Text="Failed to retireve source revision date. Using current date instead: $(_BuildDate)" />
+    <Message Condition=" '$(SourceRevisionDateExitCode)' == '0' " Text="Using source revision date as build date: $(_BuildDate)" />
+    <PropertyGroup>
+      <Company Condition=" '$(Company)' == '' ">$(Autors)</Company>
+      <Copyright>Copyright © $(_BuildYear) $(Company)</Copyright>
+    </PropertyGroup>
+  </Target>
+  <Target Name="CheckVersion">
+    <Message Text="Check Version: '$(BuildVersion)' == '$(VersionPrefix)' [$(MSBuildProjectFile)]" Importance="high" />
+    <Error Condition=" '$(BuildVersion)' == '' " Text="Build version must not be emty" />
+    <Error Condition=" '$(BuildVersion)' != '$(VersionPrefix)' " Text="Build version '$(BuildVersion)' does not match project version '$(VersionPrefix)'" />
+  </Target>
+</Project>
