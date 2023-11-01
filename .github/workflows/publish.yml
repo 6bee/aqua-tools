@@ -74,5 +74,5 @@ jobs:
         CI_MYGET_KEY: ${{ secrets.CI_MYGET_KEY }}
         CI_NUGET_KEY: ${{ secrets.CI_NUGET_KEY }}
       run: |
-        dotnet nuget push artifacts\*.nupkg -k "$CI_MYGET_KEY" -s https://www.myget.org/F/aqua/api/v3/index.json
-        dotnet nuget push artifacts\*.nupkg -k "$CI_NUGET_KEY" -s https://api.nuget.org/v3/index.json
+        dotnet nuget push artifacts\*.nupkg -k "$env:CI_MYGET_KEY" -s https://www.myget.org/F/aqua/api/v3/index.json
+        dotnet nuget push artifacts\*.nupkg -k "$env:CI_NUGET_KEY" -s https://api.nuget.org/v3/index.json
