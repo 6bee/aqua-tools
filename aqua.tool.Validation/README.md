@@ -43,7 +43,7 @@ Existing code can easily be migrated using regex find and replace in Visual Stud
   .${method}()
   ```
 
-  ![migrate validation code](https://github.com/6bee/aqua-tools/blob/db94b46786a4172396b09ab56a5b829949fae5d4/Resources/migrate_validation_code.png)
+  ![migrate validation code](https://raw.githubusercontent.com/6bee/aqua-tools/main/Resources/migrate_validation_code.png)
 
 # Options
 
