@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project InitialTargets="__DetectLanguageFeatures">
+<Project>
   <PropertyGroup>
     <MSBuildAllProjects Condition=" '$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0' ">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
@@ -16,39 +16,4 @@
                               Or '$(AquaToolValidationNullableDisable)' == 'yes'
                               Or '$(AquaToolValidationNullableDisable)' == '1' ">$(DefineConstants);NULLABLE_ATTRIBUTES_DISABLE</DefineConstants>
   </PropertyGroup>
-  <Target Name="__DetectLanguageFeatures" BeforeTargets="Build">
-    <!--
-    Try extract specific language version
-    -->
-    <__ParseNumber Value="$(LangVersion)">
-      <Output PropertyName="__LangVersion" TaskParameter="Result" />
-    </__ParseNumber>
-    <PropertyGroup>
-      <!--
-      Set feature flag for LangVersion >= 11 or `latest`
-      -->
-      <LocalFileTypesFeatureEnabled Condition=" '$(LocalFileTypesFeatureEnabled)' == '' And ( '$(LangVersion)' == 'latest' Or '$(__LangVersion)' >= '11' ) ">true</LocalFileTypesFeatureEnabled>
-      <!--
-      Define constant based on feature flag
-      -->
-      <DefineConstants Condition=" '$(LocalFileTypesFeatureEnabled)' == 'true' ">$(DefineConstants);LOCAL_FILE_TYPES_FEATURE</DefineConstants>
-    </PropertyGroup>
-  </Target>
-  <UsingTask
-      TaskName="__ParseNumber"
-      TaskFactory="RoslynCodeTaskFactory"
-      AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" >
-    <ParameterGroup>
-      <Value ParameterType="System.String" Required="true" />
-      <Result ParameterType="System.String" Output="true" />
-    </ParameterGroup>
-    <Task>
-      <Using Namespace="System" />
-      <Code Type="Fragment" Language="cs">
-        <![CDATA[
-          Result = double.TryParse(Value, out double v) ? v.ToString() : "-1";
-        ]]>
-      </Code>
-    </Task>
-  </UsingTask>
 </Project>
