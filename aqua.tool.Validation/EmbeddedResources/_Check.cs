@@ -561,7 +561,12 @@ namespace Microsoft
     [DebuggerNonUserCode]
     [GeneratedCode("aqua.tool.Validation", "")]
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
-    file sealed class ValidatedNotNullAttribute : Attribute
+#if LOCAL_FILE_TYPES_FEATURE || NET7_0_OR_GREATER
+    file
+#else
+    [EditorBrowsable(EditorBrowsableState.Never)]
+#endif
+    sealed class ValidatedNotNullAttribute : Attribute
     {
     }
 }
