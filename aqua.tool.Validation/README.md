@@ -20,16 +20,43 @@ public void SampleMethod(IReadOnlyList<string> text)
   // Throw an ArgumentException if any element in text is null or empty.
   text.AssertItemsNotNullOrEmpty();
 }
+
+public void SampleMethod(MyType myValue)
+{
+  // Throw an ArgumentNullException if myValue is null.
+  this.nonNullValue = myValue.CheckNotNull();
+}
 ```
 
 ## Assert vs. Check
 
 Most validation methods exists in two flavors. While _assert_ simply verifies the input (e.g. `AssertNotNull`), _check_ also returns the input value to allow for fluent API style code (e.g. `CheckNotNull`).
 
-# Migrate validation code for version 2.2.0 and later
+# Migrate validation code
+
+Existing code can be migrated using regex find and replace in Visual Studio.
+
+## Replace `throw new ArgumentNullException()`
+
+Replace `someArgument ?? throw new ArgumentNullException(nameof(someArgument))` by `someArgument.CheckNotNull()`:
+
+- Search regex pattern:
+
+  ```RegEx
+  (?<pre>[\s\.\(])(?<field>.+)\s\?\?\sthrow\snew\sArgumentNullException\(((nameof\(\k<field>\))|(\"\k<field>\"))\)
+  ```
+
+- Replace regex pattern:
+
+  ```RegEx
+  ${pre}${field}.CheckNotNull()
+  ```
+
+## Migrate validation code for version 2.2.0 and later
 
 Starting with _aqua.tool.Validation v2.2.0_ the name argument can be omitted as it's atomatically injected by the compiler using the `CallerArgumentExpressionAttribute`.
-Existing code can easily be migrated using regex find and replace in Visual Studio:
+
+Replace `someArgument.CheckNotNull(nameof(someArgument))` by `someArgument.CheckNotNull()`:
 
 - Search regex pattern:
 
