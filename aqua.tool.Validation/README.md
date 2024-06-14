@@ -4,7 +4,7 @@
 
 This package is designed to work for various target frameworks and makes use of [PolySharp](https://www.nuget.org/packages/PolySharp) to integrate with different C# language versions.
 
-# How to Use
+# How to use
 
 ``` C#
 public void SampleMethod(string text)
