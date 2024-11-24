@@ -31,7 +31,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Common Package References">
-    <PackageReference Include="PolySharp" Version="1.14.1" Pack="false" />
+    <PackageReference Include="PolySharp" Version="1.15.0" Pack="false" />
   </ItemGroup>
 
   <ItemGroup Label="Common Package Files">
