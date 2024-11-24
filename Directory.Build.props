@@ -7,7 +7,7 @@
 
   <PropertyGroup Label="General Properties">
     <Nullable>enable</Nullable>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>13.0</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GeneratePackageOnBuild Condition=" '$(GeneratePackageOnBuild)' == '' and '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
     <PackageOutputPath>$(MSBuildThisFileDirectory)artifacts/</PackageOutputPath>
