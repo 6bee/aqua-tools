@@ -17,9 +17,9 @@ Former polyfill packages have been deprecated in favor of [PolySharp][PolySharp]
 - `aqua.tool.polyfill.RequiresPreviewFeatures`
 - `aqua.tool.polyfill.StackTraceHidden`
 
-[3]: https://buildstats.info/nuget/aqua.tool.Validation?includePreReleases=true
+[3]: https://img.shields.io/nuget/v/aqua.tool.Validation.svg
 [4]: https://www.nuget.org/packages/aqua.tool.Validation
-[5]: https://img.shields.io/myget/aqua/vpre/aqua.tool.Validation.svg?style=flat-square&label=myget
+[5]: https://img.shields.io/myget/aqua/vpre/aqua.tool.Validation.svg?label=myget
 [6]: https://www.myget.org/feed/aqua/package/nuget/aqua.tool.Validation
 
 [lic-badge]: https://img.shields.io/github/license/6bee/aqua-tools.svg
