@@ -6,7 +6,7 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <NoWarn>$(NoWarn);NU5128</NoWarn>
   </PropertyGroup>
-  
+
   <PropertyGroup Label="Package Metadata">
     <Description>Provides C# source generated extension methods for argument validation.</Description>
     <PackageTags>c# csharp validation generator</PackageTags>
@@ -16,7 +16,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.11.0" PrivateAssets="all" Pack="false" />
+    <!--
+      Roslyn (Microsoft.CodeAnalysis.CSharp package version) implies required compiler/VS version for package consumers.
+      See https://aka.ms/roslyn-packages for more detais.
+    -->
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.1" PrivateAssets="all" Pack="false" />
   </ItemGroup>
 
   <ItemGroup>
