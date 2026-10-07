@@ -6,12 +6,12 @@
   <PropertyGroup>
     <PolySharpIncludeRuntimeSupportedAttributes Condition=" '$(PolySharpIncludeRuntimeSupportedAttributes)' == '' ">true</PolySharpIncludeRuntimeSupportedAttributes>
     <AquaToolValidationUseEmbeddedAttribute Condition=" '$(AquaToolValidationUseEmbeddedAttribute)' == '' ">true</AquaToolValidationUseEmbeddedAttribute>
-    <DefineConstants Condition=" '$(AquaToolValidationUseEmbeddedAttribute)' == 'true'
-                              Or '$(AquaToolValidationUseEmbeddedAttribute)' == 'yes'
-                              Or '$(AquaToolValidationUseEmbeddedAttribute)' == '1' ">$(DefineConstants);AQUA_TOOL_VALIDATION_USE_EMBEDDED_ATTRIBUTE</DefineConstants>
     <DefineConstants Condition=" '$(AquaToolValidationDisable)' == 'true'
                               Or '$(AquaToolValidationDisable)' == 'yes'
                               Or '$(AquaToolValidationDisable)' == '1' ">$(DefineConstants);AQUA_TOOL_VALIDATION_DISABLE</DefineConstants>
+    <DefineConstants Condition=" '$(AquaToolValidationUseEmbeddedAttribute)' == 'true'
+                              Or '$(AquaToolValidationUseEmbeddedAttribute)' == 'yes'
+                              Or '$(AquaToolValidationUseEmbeddedAttribute)' == '1' ">$(DefineConstants);AQUA_TOOL_VALIDATION_USE_EMBEDDED_ATTRIBUTE</DefineConstants>
     <DefineConstants Condition=" '$(AquaToolValidationPublic)' == 'true'
                               Or '$(AquaToolValidationPublic)' == 'yes'
                               Or '$(AquaToolValidationPublic)' == 'enabled'
