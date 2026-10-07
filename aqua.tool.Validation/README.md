@@ -76,8 +76,9 @@ Replace `someArgument.CheckNotNull(nameof(someArgument))` by `someArgument.Check
 
 Code generation can be configured through some MSBuild properties to set in consuming projects.
 
-| Property                            | Value       | Description                                                                                         |
-| :---                                | :---        | :---                                                                                                |
-| `AquaToolValidationDisable`         | true\|false | Disable compilation of generated source code.                                                       |
-| `AquaToolValidationPublic`          | true\|false | Declare generated source code as public. By default, generated source code has internal visibility. |
-| `AquaToolValidationNullableDisable` | true\|false | Suppress nullable attributes.                                                                       |
+| Property                                 | Value           | Description                                                                                                                                                       |
+| :---                                     | :---            | :---                                                                                                                                                              |
+| `AquaToolValidationDisable`              | `true`\|`false` | Disable compilation of generated source code.                                                                                                                     |
+| `AquaToolValidationUseEmbeddedAttribute` | `true`\|`false` | Generate code as "embedded", meaning that even if `InternalsVisibleTo` is used, generated types are still not visible to the other assemblies. Default is `true`. |
+| `AquaToolValidationPublic`               | `true`\|`false` | Declare generated source code as public. By default, generated source code has internal visibility.                                                               |
+| `AquaToolValidationNullableDisable`      | `true`\|`false` | Suppress nullable attributes.                                                                                                                                     |

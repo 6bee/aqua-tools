@@ -1,4 +1,3 @@
-# aqua-tools
 
 [![GitHub license][lic-badge]][lic-link]
 [![Github Workflow][pub-badge]][pub-link]
@@ -6,6 +5,14 @@
 | package                | doc                                      | nuget                  | myget                        |
 | :---                   | :---                                     | :---                   | :---                         |
 | `aqua.tool.Validation` | [readme](aqua.tool.Validation/README.md) | [![NuGet Badge][3]][4] | [![MyGet Pre Release][5]][6] |
+
+# aqua-tools v4
+
+## What's new
+
+- `aqua.tool.Validation` has new msbuild property `AquaToolValidationUseEmbeddedAttribute` which is `true` by default, causing generated code to be "embedded", meaning that even if `InternalsVisibleTo` is used, generated types are still not visible to the other assemblies.
+
+# aqua-tools v3
 
 ## Deprecated Packages
 
