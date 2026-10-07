@@ -8,6 +8,7 @@
 
 #if !AQUA_TOOL_VALIDATION_DISABLE
 
+using global::System;
 using global::System.Collections.Generic;
 using global::System.Linq;
 
@@ -53,6 +54,8 @@ static class _Check
 {
     private const MethodImplOptions AggressiveInlining = (MethodImplOptions)256;
 
+    // NotNull ////////////////////
+
     /// <summary>
     ///   Throws an <see cref="ArgumentNullException"/> if <paramref name="value"/> is <see langword="null"/>,
     ///   otherwise the <paramref name="value"/> is returned.
@@ -122,6 +125,8 @@ static class _Check
             throw new ArgumentNullException(paramName);
         }
     }
+
+    // NotNullOrEmpty ////////////////////
 
     /// <summary>
     ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
@@ -288,6 +293,32 @@ static class _Check
     }
 
     /// <summary>
+    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
+    [MethodImpl(AggressiveInlining)]
+    public static void AssertNotNullOrEmpty<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this IEnumerable<T>? items,
+        [CallerArgumentExpression("items")] string? paramName = null)
+    {
+        if (items is null)
+        {
+            throw new ArgumentNullException(paramName);
+        }
+
+        if (!items.Any())
+        {
+            throw new ArgumentException($"{(items is string ? "String" : "Collection")} must not be empty.", paramName);
+        }
+    }
+
+    // NotNullOrWhiteSpace ////////////////////
+
+    /// <summary>
     ///   Throws if <paramref name="value"/> is either <see langword="null"/> or white space.
     /// </summary>
     /// <exception cref="ArgumentNullException">If <paramref name="value"/> is <see langword="null"/>.</exception>
@@ -315,30 +346,6 @@ static class _Check
     }
 
     /// <summary>
-    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
-    /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
-    [MethodImpl(AggressiveInlining)]
-    public static void AssertNotNullOrEmpty<T>(
-#if !NULLABLE_ATTRIBUTES_DISABLE
-        [NotNull]
-#endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IEnumerable<T>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
-    {
-        if (items is null)
-        {
-            throw new ArgumentNullException(paramName);
-        }
-
-        if (!items.Any())
-        {
-            throw new ArgumentException($"{(items is string ? "String" : "Collection")} must not be empty.", paramName);
-        }
-    }
-
-    /// <summary>
     ///   Throws if <paramref name="items"/> is either <see langword="null"/> or white space.
     /// </summary>
     /// <exception cref="ArgumentNullException">If <paramref name="value"/> is <see langword="null"/>.</exception>
@@ -361,6 +368,8 @@ static class _Check
             throw new ArgumentException("String must not be empty or white space.", paramName);
         }
     }
+
+    // ItemsNotNull ////////////////////
 
     /// <summary>
     ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
@@ -501,12 +510,14 @@ static class _Check
         }
     }
 
+    // ItemsNotNullOrEmpty ////////////////////
+
     /// <summary>
     ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/> or empty.
     /// </summary>
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/> or empty.</exception>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    [MethodImpl(AggressiveInlining)]
     public static void AssertItemsNotNullOrEmpty(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [NotNull]
@@ -525,12 +536,14 @@ static class _Check
         }
     }
 
+    // ItemsNotNullOrWhiteSpace ////////////////////
+
     /// <summary>
     ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/> or white space.
     /// </summary>
     /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/> or white space.</exception>
-    [MethodImpl((MethodImplOptions)AggressiveInlining)]
+    [MethodImpl(AggressiveInlining)]
     public static void AssertItemsNotNullOrWhiteSpace(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [NotNull]
@@ -546,6 +559,222 @@ static class _Check
         if (items.Any(string.IsNullOrWhiteSpace))
         {
             throw new ArgumentException("Collection must not contain any null or white space strings.", paramName);
+        }
+    }
+
+    // GreaterThan ////////////////////
+
+    [MethodImpl(AggressiveInlining)]
+    public static T CheckGreaterThan<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this T? value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertGreaterThan(other, paramName);
+        return value!.Value;
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static T CheckGreaterThan<T>(
+        this T value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertGreaterThan(other, paramName);
+        return value;
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static void AssertGreaterThan<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this T? value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertNotNull(paramName);
+        value!.Value.AssertGreaterThan(other, paramName);
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static void AssertGreaterThan<T>(
+        this T value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        if (value.CompareTo(other) <= 0)
+        {
+            throw new ArgumentOutOfRangeException(paramName, value, $"Value must be greater than {other}.");
+        }
+    }
+
+    // GreaterThanOrEqual ////////////////////
+
+    [MethodImpl(AggressiveInlining)]
+    public static T CheckGreaterThanOrEqual<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this T? value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertGreaterThanOrEqual(other, paramName);
+        return value!.Value;
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static T CheckGreaterThanOrEqual<T>(
+        this T value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertGreaterThanOrEqual(other, paramName);
+        return value;
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static void AssertGreaterThanOrEqual<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this T? value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertNotNull(paramName);
+        value!.Value.AssertGreaterThanOrEqual(other, paramName);
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static void AssertGreaterThanOrEqual<T>(
+        this T value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        if (value.CompareTo(other) < 0)
+        {
+            throw new ArgumentOutOfRangeException(paramName, value, $"Value must be greater than or equal to {other}.");
+        }
+    }
+
+    // LessThan ////////////////////
+
+    [MethodImpl(AggressiveInlining)]
+    public static T CheckLessThan<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this T? value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertLessThan(other, paramName);
+        return value!.Value;
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static T CheckLessThan<T>(
+        this T value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertLessThan(other, paramName);
+        return value;
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static void AssertLessThan<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this T? value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertNotNull(paramName);
+        value!.Value.AssertLessThan(other, paramName);
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static void AssertLessThan<T>(
+        this T value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        if (value.CompareTo(other) >= 0)
+        {
+            throw new ArgumentOutOfRangeException(paramName, value, $"Value must be less than {other}.");
+        }
+    }
+
+    // LessThanOrEqual ////////////////////
+
+    [MethodImpl(AggressiveInlining)]
+    public static T CheckLessThanOrEqual<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this T? value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertLessThanOrEqual(other, paramName);
+        return value!.Value;
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static T CheckLessThanOrEqual<T>(
+        this T value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertLessThanOrEqual(other, paramName);
+        return value;
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static void AssertLessThanOrEqual<T>(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this T? value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        value.AssertNotNull(paramName);
+        value!.Value.AssertLessThanOrEqual(other, paramName);
+    }
+
+    [MethodImpl(AggressiveInlining)]
+    public static void AssertLessThanOrEqual<T>(
+        this T value,
+        T other,
+        [CallerArgumentExpression("value")] string? paramName = null)
+        where T : struct, IComparable<T>
+    {
+        if (value.CompareTo(other) > 0)
+        {
+            throw new ArgumentOutOfRangeException(paramName, value, $"Value must be less than or equal to {other}.");
         }
     }
 }
