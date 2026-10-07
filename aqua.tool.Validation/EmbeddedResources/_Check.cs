@@ -41,6 +41,9 @@ using EditorBrowsableState = global::System.ComponentModel.EditorBrowsableState;
 [DebuggerNonUserCode]
 [DebuggerStepThrough]
 [StackTraceHidden]
+#if AQUA_TOOL_VALIDATION_USE_EMBEDDED_ATTRIBUTE
+[global::Microsoft.CodeAnalysis.EmbeddedAttribute]
+#endif // AQUA_TOOL_VALIDATION_USE_EMBEDDED_ATTRIBUTE
 #if AQUA_TOOL_VALIDATION_PUBLIC
 public
 #else
@@ -546,4 +549,5 @@ static class _Check
         }
     }
 }
+
 #endif // AQUA_TOOL_VALIDATION_DISABLE

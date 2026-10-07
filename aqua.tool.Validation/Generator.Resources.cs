@@ -76,17 +76,20 @@ partial class Generator
     /// <returns>The <see cref="GenerationOptions"/> for the current generation.</returns>
     private static GenerationOptions GetGenerationOptions(AnalyzerConfigOptionsProvider options, CancellationToken _)
     {
-        var usePublicAccessibilityForGeneratedTypes = options.GetBoolMSBuildProperty(MSBuildProperties.UsePublicAccessibilityForGeneratedTypes);
-
         var disableGeneratedCode = options.GetBoolMSBuildProperty(MSBuildProperties.DisableGeneratedCode);
+
+        var useEmbeddedAttribute = options.GetBoolMSBuildProperty(MSBuildProperties.UseEmbeddedAttribute);
+
+        var usePublicAccessibilityForGeneratedTypes = options.GetBoolMSBuildProperty(MSBuildProperties.UsePublicAccessibilityForGeneratedTypes);
 
         var excludeGeneratedTypes = options.GetStringArrayMSBuildProperty(MSBuildProperties.ExcludeGeneratedTypes);
 
         var includeGeneratedTypes = options.GetStringArrayMSBuildProperty(MSBuildProperties.IncludeGeneratedTypes);
 
         return new(
-            usePublicAccessibilityForGeneratedTypes,
             disableGeneratedCode,
+            useEmbeddedAttribute,
+            usePublicAccessibilityForGeneratedTypes,
             excludeGeneratedTypes,
             includeGeneratedTypes);
     }

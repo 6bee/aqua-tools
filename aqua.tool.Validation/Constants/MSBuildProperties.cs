@@ -6,14 +6,19 @@ namespace aqua.tool.Validation.Constants;
 internal static class MSBuildProperties
 {
     /// <summary>
-    /// The MSBuild property for <see cref="Models.GenerationOptions.UsePublicAccessibilityForGeneratedTypes"/>.
-    /// </summary>
-    public const string UsePublicAccessibilityForGeneratedTypes = "AquaToolValidationPublic";
-
-    /// <summary>
     /// The MSBuild property for <see cref="Models.GenerationOptions.DisableGeneratedCode"/>.
     /// </summary>
     public const string DisableGeneratedCode = "AquaToolValidationDisable";
+
+    /// <summary>
+    /// The MSBuild property for <see cref="Models.GenerationOptions.UseEmbeddedAttribute"/>.
+    /// </summary>
+    public const string UseEmbeddedAttribute = "AquaToolValidationUseEmbeddedAttribute";
+
+    /// <summary>
+    /// The MSBuild property for <see cref="Models.GenerationOptions.UsePublicAccessibilityForGeneratedTypes"/>.
+    /// </summary>
+    public const string UsePublicAccessibilityForGeneratedTypes = "AquaToolValidationPublic";
 
     /// <summary>
     /// The MSBuild property for <see cref="Models.GenerationOptions.ExcludeGeneratedTypes"/>.
