@@ -65,9 +65,9 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
-        [CallerArgumentExpression("value")] string? name = null)
+        [CallerArgumentExpression("value")] string? paramName = null)
         where T : struct
-        => value ?? throw new ArgumentNullException(name);
+        => value ?? throw new ArgumentNullException(paramName);
 
     /// <summary>
     ///   Throws an <see cref="ArgumentNullException"/> if <paramref name="value"/> is <see langword="null"/>,
@@ -81,9 +81,9 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
-        [CallerArgumentExpression("value")] string? name = null)
+        [CallerArgumentExpression("value")] string? paramName = null)
         where T : class
-        => value ?? throw new ArgumentNullException(name);
+        => value ?? throw new ArgumentNullException(paramName);
 
     /// <summary>
     ///   Throws an <see cref="ArgumentNullException"/> if <paramref name="value"/> is <see langword="null"/>.
@@ -95,12 +95,12 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
-        [CallerArgumentExpression("value")] string? name = null)
+        [CallerArgumentExpression("value")] string? paramName = null)
         where T : struct
     {
         if (value is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
     }
 
@@ -114,12 +114,12 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this T? value,
-        [CallerArgumentExpression("value")] string? name = null)
+        [CallerArgumentExpression("value")] string? paramName = null)
         where T : class
     {
         if (value is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
     }
 
@@ -135,16 +135,16 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        [CallerArgumentExpression("items")] string? name = null)
+        [CallerArgumentExpression("items")] string? paramName = null)
     {
         if (items is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (!items.Any())
         {
-            throw new ArgumentException("Collection must not be empty.", name);
+            throw new ArgumentException("Collection must not be empty.", paramName);
         }
 
         return items;
@@ -162,16 +162,16 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyCollection<T>? items,
-        [CallerArgumentExpression("items")] string? name = null)
+        [CallerArgumentExpression("items")] string? paramName = null)
     {
         if (items is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (!items.Any())
         {
-            throw new ArgumentException("Collection must not be empty.", name);
+            throw new ArgumentException("Collection must not be empty.", paramName);
         }
 
         return items;
@@ -189,16 +189,16 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyList<T>? items,
-        [CallerArgumentExpression("items")] string? name = null)
+        [CallerArgumentExpression("items")] string? paramName = null)
     {
         if (items is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (!items.Any())
         {
-            throw new ArgumentException("Collection must not be empty.", name);
+            throw new ArgumentException("Collection must not be empty.", paramName);
         }
 
         return items;
@@ -216,16 +216,16 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyDictionary<TKey, TValue>? dict,
-        [CallerArgumentExpression("dict")] string? name = null)
+        [CallerArgumentExpression("dict")] string? paramName = null)
     {
         if (dict is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (!dict.Any())
         {
-            throw new ArgumentException("Collection must not be empty.", name);
+            throw new ArgumentException("Collection must not be empty.", paramName);
         }
 
         return dict;
@@ -244,16 +244,16 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlySet<T>? set,
-        [CallerArgumentExpression("set")] string? name = null)
+        [CallerArgumentExpression("set")] string? paramName = null)
     {
         if (set is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (!set.Any())
         {
-            throw new ArgumentException("Collection must not be empty.", name);
+            throw new ArgumentException("Collection must not be empty.", paramName);
         }
 
         return set;
@@ -272,16 +272,16 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this string? value,
-        [CallerArgumentExpression("value")] string? name = null)
+        [CallerArgumentExpression("value")] string? paramName = null)
     {
         if (value is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (value.Length == 0)
         {
-            throw new ArgumentException("String must not be empty.", name);
+            throw new ArgumentException("String must not be empty.", paramName);
         }
 
         return value;
@@ -299,16 +299,16 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this string? value,
-        [CallerArgumentExpression("value")] string? name = null)
+        [CallerArgumentExpression("value")] string? paramName = null)
     {
         if (value is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new ArgumentException("String must not be empty or white space.", name);
+            throw new ArgumentException("String must not be empty or white space.", paramName);
         }
 
         return value;
@@ -325,16 +325,16 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        [CallerArgumentExpression("items")] string? name = null)
+        [CallerArgumentExpression("items")] string? paramName = null)
     {
         if (items is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (!items.Any())
         {
-            throw new ArgumentException($"{(items is string ? "String" : "Collection")} must not be empty.", name);
+            throw new ArgumentException($"{(items is string ? "String" : "Collection")} must not be empty.", paramName);
         }
     }
 
@@ -349,16 +349,16 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this string? value,
-        [CallerArgumentExpression("value")] string? name = null)
+        [CallerArgumentExpression("value")] string? paramName = null)
     {
         if (value is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new ArgumentException("String must not be empty or white space.", name);
+            throw new ArgumentException("String must not be empty or white space.", paramName);
         }
     }
 
@@ -374,17 +374,17 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        [CallerArgumentExpression("items")] string? name = null)
+        [CallerArgumentExpression("items")] string? paramName = null)
         where T : class
     {
         if (items is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (items.Any(x => x is null))
         {
-            throw new ArgumentException("Collection must not contain any null items.", name);
+            throw new ArgumentException("Collection must not contain any null items.", paramName);
         }
 
         return items;
@@ -402,17 +402,17 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyCollection<T>? items,
-        [CallerArgumentExpression("items")] string? name = null)
+        [CallerArgumentExpression("items")] string? paramName = null)
         where T : class
     {
         if (items is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (items.Any(x => x is null))
         {
-            throw new ArgumentException("Collection must not contain any null items.", name);
+            throw new ArgumentException("Collection must not contain any null items.", paramName);
         }
 
         return items;
@@ -430,17 +430,17 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlyList<T>? items,
-        [CallerArgumentExpression("items")] string? name = null)
+        [CallerArgumentExpression("items")] string? paramName = null)
         where T : class
     {
         if (items is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (items.Any(x => x is null))
         {
-            throw new ArgumentException("Collection must not contain any null items.", name);
+            throw new ArgumentException("Collection must not contain any null items.", paramName);
         }
 
         return items;
@@ -459,17 +459,17 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IReadOnlySet<T>? items,
-        [CallerArgumentExpression("items")] string? name = null)
+        [CallerArgumentExpression("items")] string? paramName = null)
         where T : class
     {
         if (items is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (items.Any(x => x is null))
         {
-            throw new ArgumentException("Collection must not contain any null items.", name);
+            throw new ArgumentException("Collection must not contain any null items.", paramName);
         }
 
         return items;
@@ -487,17 +487,17 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<T>? items,
-        [CallerArgumentExpression("items")] string? name = null)
+        [CallerArgumentExpression("items")] string? paramName = null)
         where T : class
     {
         if (items is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (items.Any(x => x is null))
         {
-            throw new ArgumentException("Collection must not contain any null items.", name);
+            throw new ArgumentException("Collection must not contain any null items.", paramName);
         }
     }
 
@@ -512,16 +512,16 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<string?>? items,
-        [CallerArgumentExpression("items")] string? name = null)
+        [CallerArgumentExpression("items")] string? paramName = null)
     {
         if (items is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (items.Any(string.IsNullOrEmpty))
         {
-            throw new ArgumentException("Collection must not contain any null or empty strings.", name);
+            throw new ArgumentException("Collection must not contain any null or empty strings.", paramName);
         }
     }
 
@@ -536,16 +536,16 @@ static class _Check
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
         this IEnumerable<string?>? items,
-        [CallerArgumentExpression("items")] string? name = null)
+        [CallerArgumentExpression("items")] string? paramName = null)
     {
         if (items is null)
         {
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(paramName);
         }
 
         if (items.Any(string.IsNullOrWhiteSpace))
         {
-            throw new ArgumentException("Collection must not contain any null or white space strings.", name);
+            throw new ArgumentException("Collection must not contain any null or white space strings.", paramName);
         }
     }
 }
