@@ -24,7 +24,7 @@ public void SampleMethod(IReadOnlyList<string> text)
 public void SampleMethod(MyType myValue)
 {
   // Throw an ArgumentNullException if myValue is null.
-  this.nonNullValue = myValue.CheckNotNull();
+  MyType value = myValue.CheckNotNull();
 }
 
 public void SampleMethod(long? number)
