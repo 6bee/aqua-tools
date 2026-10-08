@@ -10,8 +10,8 @@ This package is designed to work for various target frameworks and makes use of 
 public void SampleMethod(string text)
 {
   // Throw an ArgumentNullException if text is null.
-  // Throw an ArgumentException if text is empty.
-  text.AssertNotNullOrEmpty();
+  // Throw an ArgumentException if text is empty, or consists only of white-space.
+  text.AssertNotNullOrWhiteSpace();
 }
 
 public void SampleMethod(IReadOnlyList<string> text)
@@ -25,6 +25,13 @@ public void SampleMethod(MyType myValue)
 {
   // Throw an ArgumentNullException if myValue is null.
   this.nonNullValue = myValue.CheckNotNull();
+}
+
+public void SampleMethod(long? number)
+{
+  // Throw an ArgumentNullException if number is null.
+  // Throw an ArgumentOutOfRangeException if number less than 42.
+  number.AssertGreaterThanOrEqual(42);
 }
 ```
 
@@ -74,7 +81,7 @@ Replace `someArgument.CheckNotNull(nameof(someArgument))` by `someArgument.Check
 
 # Options
 
-Code generation can be configured through some MSBuild properties to set in consuming projects.
+Code generation can be configured through some MSBuild properties in the consuming projects.
 
 | Property                                 | Value           | Description                                                                                                                                                       |
 | :---                                     | :---            | :---                                                                                                                                                              |
