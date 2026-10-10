@@ -24,6 +24,7 @@ using IEnumerable = global::System.Collections.IEnumerable;
 using MethodImplAttribute = global::System.Runtime.CompilerServices.MethodImplAttribute;
 using MethodImplOptions = global::System.Runtime.CompilerServices.MethodImplOptions;
 using NotNullAttribute = global::System.Diagnostics.CodeAnalysis.NotNullAttribute;
+using DoesNotReturnAttribute = global::System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute;
 using StackTraceHiddenAttribute = global::System.Diagnostics.StackTraceHiddenAttribute;
 using SuppressMessageAttribute = global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
 
@@ -48,6 +49,7 @@ internal
 static class _Check
 {
     private const MethodImplOptions AggressiveInlining = (MethodImplOptions)256;
+    private const MethodImplOptions NoInlining = (MethodImplOptions)8;
 
     // NotNull ////////////////////
 
@@ -65,7 +67,7 @@ static class _Check
         this T? value,
         [CallerArgumentExpression("value")] string? paramName = null)
         where T : struct
-        => value ?? throw new ArgumentNullException(paramName);
+        => value ?? ThrowArgumentNull<T>(paramName);
 
     /// <summary>
     ///   Throws an <see cref="ArgumentNullException"/> if <paramref name="value"/> is <see langword="null"/>,
@@ -81,7 +83,7 @@ static class _Check
         this T? value,
         [CallerArgumentExpression("value")] string? paramName = null)
         where T : class
-        => value ?? throw new ArgumentNullException(paramName);
+        => value ?? ThrowArgumentNull<T>(paramName);
 
     /// <summary>
     ///   Throws an <see cref="ArgumentNullException"/> if <paramref name="value"/> is <see langword="null"/>.
@@ -98,7 +100,7 @@ static class _Check
     {
         if (value is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
     }
 
@@ -117,7 +119,7 @@ static class _Check
     {
         if (value is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
     }
 
@@ -140,10 +142,10 @@ static class _Check
     {
         if (collection is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
 
-        EnsureNotEmpty(collection, paramName);
+        EnsureNotEmptyCollection(collection, paramName);
 
         return collection;
     }
@@ -162,11 +164,11 @@ static class _Check
     {
         if (!collection.HasValue)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
 
         var value = collection.Value;
-        EnsureNotEmpty(value, paramName);
+        EnsureNotEmptyCollection(value, paramName);
         return value;
     }
 
@@ -186,12 +188,12 @@ static class _Check
     {
         if (value is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
 
         if (value.Length == 0)
         {
-            throw new ArgumentException("String must not be empty.", paramName);
+            ThrowEmptyString(paramName);
         }
 
         return value;
@@ -212,10 +214,10 @@ static class _Check
     {
         if (collection is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
 
-        EnsureNotEmpty(collection, paramName);
+        EnsureNotEmptyCollection(collection, paramName);
     }
 
     /// <summary>
@@ -233,38 +235,12 @@ static class _Check
     {
         if (value is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
 
         if (value.Length == 0)
         {
-            throw new ArgumentException("String must not be empty.", paramName);
-        }
-    }
-
-    private static void EnsureNotEmpty(IEnumerable collection, string? paramName)
-    {
-        if (collection is ICollection c)
-        {
-            if (c.Count == 0)
-            {
-                throw new ArgumentException("Collection must not be empty.", paramName);
-            }
-
-            return;
-        }
-
-        var e = collection.GetEnumerator();
-        try
-        {
-            if (!e.MoveNext())
-            {
-                throw new ArgumentException("Collection must not be empty.", paramName);
-            }
-        }
-        finally
-        {
-            (e as IDisposable)?.Dispose();
+            ThrowEmptyString(paramName);
         }
     }
 
@@ -286,12 +262,12 @@ static class _Check
     {
         if (value is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
 
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new ArgumentException("String must not be empty or white space.", paramName);
+            ThrowWhiteSpaceString(paramName);
         }
 
         return value;
@@ -312,12 +288,12 @@ static class _Check
     {
         if (value is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
 
         if (string.IsNullOrWhiteSpace(value))
         {
-            throw new ArgumentException("String must not be empty or white space.", paramName);
+            ThrowWhiteSpaceString(paramName);
         }
     }
 
@@ -340,16 +316,10 @@ static class _Check
     {
         if (collection is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
 
-        foreach (object? item in collection)
-        {
-            if (item is null)
-            {
-                throw new ArgumentException("Collection must not contain any null items.", paramName);
-            }
-        }
+        EnsureItemsNotNullSlow(collection, paramName);
 
         return collection;
     }
@@ -369,16 +339,10 @@ static class _Check
     {
         if (collection is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
 
-        foreach (object? item in collection)
-        {
-            if (item is null)
-            {
-                throw new ArgumentException("Collection must not contain any null items.", paramName);
-            }
-        }
+        EnsureItemsNotNullSlow(collection, paramName);
     }
 
     // ItemsNotNullOrEmpty ////////////////////
@@ -398,16 +362,10 @@ static class _Check
     {
         if (collection is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
 
-        foreach (var item in collection)
-        {
-            if (string.IsNullOrEmpty(item))
-            {
-                throw new ArgumentException("Collection must not contain any null or empty strings.", paramName);
-            }
-        }
+        EnsureItemsNotNullOrEmptySlow(collection, paramName);
     }
 
     // ItemsNotNullOrWhiteSpace ////////////////////
@@ -427,16 +385,10 @@ static class _Check
     {
         if (collection is null)
         {
-            throw new ArgumentNullException(paramName);
+            ThrowArgumentNull(paramName);
         }
 
-        foreach (var item in collection)
-        {
-            if (string.IsNullOrWhiteSpace(item))
-            {
-                throw new ArgumentException("Collection must not contain any null or white space strings.", paramName);
-            }
-        }
+        EnsureItemsNotNullOrWhiteSpaceSlow(collection, paramName);
     }
 
     // GreaterThan ////////////////////
@@ -489,7 +441,7 @@ static class _Check
     {
         if (value.CompareTo(other) <= 0)
         {
-            throw new ArgumentOutOfRangeException(paramName, value, $"Value must be greater than {other}.");
+            ThrowGreaterThan(paramName, value, other);
         }
     }
 
@@ -543,7 +495,7 @@ static class _Check
     {
         if (value.CompareTo(other) < 0)
         {
-            throw new ArgumentOutOfRangeException(paramName, value, $"Value must be greater than or equal to {other}.");
+            ThrowGreaterThanOrEqual(paramName, value, other);
         }
     }
 
@@ -597,7 +549,7 @@ static class _Check
     {
         if (value.CompareTo(other) >= 0)
         {
-            throw new ArgumentOutOfRangeException(paramName, value, $"Value must be less than {other}.");
+            ThrowLessThan(paramName, value, other);
         }
     }
 
@@ -651,9 +603,134 @@ static class _Check
     {
         if (value.CompareTo(other) > 0)
         {
-            throw new ArgumentOutOfRangeException(paramName, value, $"Value must be less than or equal to {other}.");
+            ThrowLessThanOrEqual(paramName, value, other);
         }
     }
+
+    // Split Helper Methods ////////////////////
+
+    [MethodImpl(AggressiveInlining)]
+    private static void EnsureNotEmptyCollection(IEnumerable collection, string? paramName)
+    {
+        // Fast path: cheap and inline-friendly
+        if (collection is ICollection c)
+        {
+            if (c.Count == 0)
+            {
+                ThrowEmptyCollection(paramName);
+            }
+
+            return;
+        }
+
+        // Slow path: keep complex / exception handling logic out of hot inline path
+        EnsureNotEmptyCollectionSlow(collection, paramName);
+    }
+
+    [MethodImpl(NoInlining)]
+    private static void EnsureNotEmptyCollectionSlow(IEnumerable collection, string? paramName)
+    {
+        var e = collection.GetEnumerator();
+        try
+        {
+            if (!e.MoveNext())
+            {
+                ThrowEmptyCollection(paramName);
+            }
+        }
+        finally
+        {
+            (e as IDisposable)?.Dispose();
+        }
+    }
+
+    [MethodImpl(NoInlining)]
+    private static void EnsureItemsNotNullSlow(IEnumerable collection, string? paramName)
+    {
+        foreach (object? item in collection)
+        {
+            if (item is null)
+            {
+                ThrowNullItem(paramName);
+            }
+        }
+    }
+
+    [MethodImpl(NoInlining)]
+    private static void EnsureItemsNotNullOrEmptySlow(IEnumerable<string?> collection, string? paramName)
+    {
+        foreach (var item in collection)
+        {
+            if (string.IsNullOrEmpty(item))
+            {
+                ThrowNullOrEmptyItem(paramName);
+            }
+        }
+    }
+
+    [MethodImpl(NoInlining)]
+    private static void EnsureItemsNotNullOrWhiteSpaceSlow(IEnumerable<string?> collection, string? paramName)
+    {
+        foreach (var item in collection)
+        {
+            if (string.IsNullOrWhiteSpace(item))
+            {
+                ThrowNullOrWhiteSpaceItem(paramName);
+            }
+        }
+    }
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static void ThrowArgumentNull(string? paramName) =>
+        throw new ArgumentNullException(paramName);
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static T ThrowArgumentNull<T>(string? paramName) =>
+        throw new ArgumentNullException(paramName);
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static void ThrowEmptyCollection(string? paramName) =>
+        throw new ArgumentException("Collection must not be empty.", paramName);
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static void ThrowEmptyString(string? paramName) =>
+        throw new ArgumentException("String must not be empty.", paramName);
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static void ThrowWhiteSpaceString(string? paramName) =>
+        throw new ArgumentException("String must not be empty or white space.", paramName);
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static void ThrowNullItem(string? paramName) =>
+        throw new ArgumentException("Collection must not contain any null items.", paramName);
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static void ThrowNullOrEmptyItem(string? paramName) =>
+        throw new ArgumentException("Collection must not contain any null or empty strings.", paramName);
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static void ThrowNullOrWhiteSpaceItem(string? paramName) =>
+        throw new ArgumentException("Collection must not contain any null or white space strings.", paramName);
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static void ThrowGreaterThan<T>(string? paramName, T value, T other)
+        where T : struct =>
+        throw new ArgumentOutOfRangeException(paramName, value, $"Value must be greater than {other}.");
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static void ThrowGreaterThanOrEqual<T>(string? paramName, T value, T other)
+        where T : struct =>
+        throw new ArgumentOutOfRangeException(paramName, value, $"Value must be greater than or equal to {other}.");
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static void ThrowLessThan<T>(string? paramName, T value, T other)
+        where T : struct =>
+        throw new ArgumentOutOfRangeException(paramName, value, $"Value must be less than {other}.");
+
+    [DoesNotReturn, MethodImpl(NoInlining)]
+    private static void ThrowLessThanOrEqual<T>(string? paramName, T value, T other)
+        where T : struct =>
+        throw new ArgumentOutOfRangeException(paramName, value, $"Value must be less than or equal to {other}.");
 }
 
 #endif // AQUA_TOOL_VALIDATION_DISABLE
