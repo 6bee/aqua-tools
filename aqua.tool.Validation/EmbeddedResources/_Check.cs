@@ -38,9 +38,9 @@ using SuppressMessageAttribute = global::System.Diagnostics.CodeAnalysis.Suppres
 [DebuggerNonUserCode]
 [DebuggerStepThrough]
 [StackTraceHidden]
-#if AQUA_TOOL_VALIDATION_USE_EMBEDDED_ATTRIBUTE
+#if AQUA_TOOL_VALIDATION_EMBEDDED
 [global::Microsoft.CodeAnalysis.EmbeddedAttribute]
-#endif // AQUA_TOOL_VALIDATION_USE_EMBEDDED_ATTRIBUTE
+#endif // AQUA_TOOL_VALIDATION_EMBEDDED
 #if AQUA_TOOL_VALIDATION_PUBLIC
 public
 #else

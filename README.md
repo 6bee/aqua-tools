@@ -13,7 +13,7 @@
 - `aqua.tool.Validation` introduces new comparison validation extensions methods.
 - `aqua.tool.Validation` collection extension methods return the original collection type.
 - `aqua.tool.Validation` improved performance by splitting methods into inline-friendly fast paths and separating complex checks and exception creation into non-inlined slow/throw helpers.
-- [**breaking**] `aqua.tool.Validation` introduces a new MSBuild property, `AquaToolValidationUseEmbeddedAttribute` (default: true). When enabled, generated code is embedded, so generated internal types are not exposed to friend assemblies via `InternalsVisibleTo`.
+- [**breaking**] `aqua.tool.Validation` introduces a new MSBuild property, `AquaToolValidationEmbedded` (default: true). When enabled, generated code is embedded, so generated internal types are not exposed to friend assemblies via `InternalsVisibleTo`.
 
 # aqua-tools v3
 

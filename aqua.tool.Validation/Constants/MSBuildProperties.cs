@@ -13,7 +13,7 @@ internal static class MSBuildProperties
     /// <summary>
     /// The MSBuild property for <see cref="Models.GenerationOptions.UseEmbeddedAttribute"/>.
     /// </summary>
-    public const string UseEmbeddedAttribute = "AquaToolValidationUseEmbeddedAttribute";
+    public const string UseEmbeddedAttribute = "AquaToolValidationEmbedded";
 
     /// <summary>
     /// The MSBuild property for <see cref="Models.GenerationOptions.UsePublicAccessibilityForGeneratedTypes"/>.
