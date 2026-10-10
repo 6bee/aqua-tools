@@ -10,8 +10,10 @@
 
 ## What's new
 
-- `aqua.tool.Validation` has new msbuild property `AquaToolValidationUseEmbeddedAttribute` which is `true` by default, causing generated code to be "embedded", meaning that even if `InternalsVisibleTo` is used, generated types are still not visible to the other assemblies.
-- `aqua.tool.Validation` contains new comparison validation extensions methods.
+- `aqua.tool.Validation` introduces new comparison validation extensions methods.
+- `aqua.tool.Validation` collection extension methods return the original collection type.
+- `aqua.tool.Validation` improved performance by splitting methods into inline-friendly fast paths and separating complex checks and exception creation into non-inlined slow/throw helpers.
+- [**breaking**] `aqua.tool.Validation` introduces a new MSBuild property, `AquaToolValidationUseEmbeddedAttribute` (default: true). When enabled, generated code is embedded, so generated internal types are not exposed to friend assemblies via `InternalsVisibleTo`.
 
 # aqua-tools v3
 
