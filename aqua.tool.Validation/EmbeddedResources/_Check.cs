@@ -10,27 +10,22 @@
 
 using global::System;
 using global::System.Collections.Generic;
-using global::System.Linq;
-
 using ArgumentException = global::System.ArgumentException;
 using ArgumentNullException = global::System.ArgumentNullException;
-
+using CallerArgumentExpressionAttribute = global::System.Runtime.CompilerServices.CallerArgumentExpressionAttribute;
 using DebuggerNonUserCodeAttribute = global::System.Diagnostics.DebuggerNonUserCodeAttribute;
 using DebuggerStepThroughAttribute = global::System.Diagnostics.DebuggerStepThroughAttribute;
-using StackTraceHiddenAttribute = global::System.Diagnostics.StackTraceHiddenAttribute;
-
-using ExcludeFromCodeCoverageAttribute = global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute;
-using SuppressMessageAttribute = global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
-using NotNullAttribute = global::System.Diagnostics.CodeAnalysis.NotNullAttribute;
-
-using GeneratedCodeAttribute = global::System.CodeDom.Compiler.GeneratedCodeAttribute;
-
-using CallerArgumentExpressionAttribute = global::System.Runtime.CompilerServices.CallerArgumentExpressionAttribute;
-using MethodImplAttribute = global::System.Runtime.CompilerServices.MethodImplAttribute;
-using MethodImplOptions = global::System.Runtime.CompilerServices.MethodImplOptions;
-
 using EditorBrowsableAttribute = global::System.ComponentModel.EditorBrowsableAttribute;
 using EditorBrowsableState = global::System.ComponentModel.EditorBrowsableState;
+using ExcludeFromCodeCoverageAttribute = global::System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute;
+using GeneratedCodeAttribute = global::System.CodeDom.Compiler.GeneratedCodeAttribute;
+using ICollection = global::System.Collections.ICollection;
+using IEnumerable = global::System.Collections.IEnumerable;
+using MethodImplAttribute = global::System.Runtime.CompilerServices.MethodImplAttribute;
+using MethodImplOptions = global::System.Runtime.CompilerServices.MethodImplOptions;
+using NotNullAttribute = global::System.Diagnostics.CodeAnalysis.NotNullAttribute;
+using StackTraceHiddenAttribute = global::System.Diagnostics.StackTraceHiddenAttribute;
+using SuppressMessageAttribute = global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute;
 
 [SuppressMessage(
     "Major Bug",
@@ -129,141 +124,51 @@ static class _Check
     // NotNullOrEmpty ////////////////////
 
     /// <summary>
-    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
+    ///   Throws if <paramref name="collection"/> is either <see langword="null"/> or empty.
     /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
-    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
+    /// <exception cref="ArgumentNullException">If <paramref name="collection"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="collection"/> is empty.</exception>
+    /// <returns>The <paramref name="collection"/> unless it's <see langword="null"/> or empty.</returns>
     [MethodImpl(AggressiveInlining)]
-    public static IEnumerable<T> CheckNotNullOrEmpty<T>(
+    public static TCollection CheckNotNullOrEmpty<TCollection>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IEnumerable<T>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
+        this TCollection? collection,
+        [CallerArgumentExpression("collection")] string? paramName = null)
+        where TCollection : class, IEnumerable
     {
-        if (items is null)
+        if (collection is null)
         {
             throw new ArgumentNullException(paramName);
         }
 
-        if (!items.Any())
-        {
-            throw new ArgumentException("Collection must not be empty.", paramName);
-        }
+        EnsureNotEmpty(collection, paramName);
 
-        return items;
+        return collection;
     }
 
     /// <summary>
-    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
+    ///   Throws if <paramref name="collection"/> is either <see langword="null"/> or empty.
     /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
-    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
-    [MethodImpl(AggressiveInlining)]
-    public static IReadOnlyCollection<T> CheckNotNullOrEmpty<T>(
-#if !NULLABLE_ATTRIBUTES_DISABLE
-        [NotNull]
-#endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IReadOnlyCollection<T>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
+    /// <exception cref="ArgumentNullException">If <paramref name="collection"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="collection"/> is empty.</exception>
+    /// <returns>The <paramref name="collection"/> unless it's <see langword="null"/> or empty.</returns>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static TCollection CheckNotNullOrEmpty<TCollection>(
+        this TCollection? collection,
+        [CallerArgumentExpression("collection")] string? paramName = null)
+        where TCollection : struct, IEnumerable
     {
-        if (items is null)
+        if (!collection.HasValue)
         {
             throw new ArgumentNullException(paramName);
         }
 
-        if (!items.Any())
-        {
-            throw new ArgumentException("Collection must not be empty.", paramName);
-        }
-
-        return items;
+        var value = collection.Value;
+        EnsureNotEmpty(value, paramName);
+        return value;
     }
-
-    /// <summary>
-    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
-    /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
-    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
-    [MethodImpl(AggressiveInlining)]
-    public static IReadOnlyList<T> CheckNotNullOrEmpty<T>(
-#if !NULLABLE_ATTRIBUTES_DISABLE
-        [NotNull]
-#endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IReadOnlyList<T>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
-    {
-        if (items is null)
-        {
-            throw new ArgumentNullException(paramName);
-        }
-
-        if (!items.Any())
-        {
-            throw new ArgumentException("Collection must not be empty.", paramName);
-        }
-
-        return items;
-    }
-
-    /// <summary>
-    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
-    /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
-    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
-    [MethodImpl(AggressiveInlining)]
-    public static IReadOnlyDictionary<TKey, TValue> CheckNotNullOrEmpty<TKey, TValue>(
-#if !NULLABLE_ATTRIBUTES_DISABLE
-        [NotNull]
-#endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IReadOnlyDictionary<TKey, TValue>? dict,
-        [CallerArgumentExpression("dict")] string? paramName = null)
-    {
-        if (dict is null)
-        {
-            throw new ArgumentNullException(paramName);
-        }
-
-        if (!dict.Any())
-        {
-            throw new ArgumentException("Collection must not be empty.", paramName);
-        }
-
-        return dict;
-    }
-
-#if NET5_0_OR_GREATER
-    /// <summary>
-    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
-    /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
-    /// <returns>The <paramref name="items"/> unless it's <see langword="null"/>.</returns>
-    [MethodImpl(AggressiveInlining)]
-    public static IReadOnlySet<T> CheckNotNullOrEmpty<T>(
-#if !NULLABLE_ATTRIBUTES_DISABLE
-        [NotNull]
-#endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IReadOnlySet<T>? set,
-        [CallerArgumentExpression("set")] string? paramName = null)
-    {
-        if (set is null)
-        {
-            throw new ArgumentNullException(paramName);
-        }
-
-        if (!set.Any())
-        {
-            throw new ArgumentException("Collection must not be empty.", paramName);
-        }
-
-        return set;
-    }
-#endif // NET5_0_OR_GREATER
 
     /// <summary>
     ///   Throws if <paramref name="value"/> is either <see langword="null"/> or empty.
@@ -293,26 +198,73 @@ static class _Check
     }
 
     /// <summary>
-    ///   Throws if <paramref name="items"/> is either <see langword="null"/> or empty.
+    ///   Throws if <paramref name="collection"/> is either <see langword="null"/> or empty.
     /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If <paramref name="items"/> is empty.</exception>
+    /// <exception cref="ArgumentNullException">If <paramref name="collection"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="collection"/> is empty.</exception>
     [MethodImpl(AggressiveInlining)]
-    public static void AssertNotNullOrEmpty<T>(
+    public static void AssertNotNullOrEmpty(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IEnumerable<T>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
+        this IEnumerable? collection,
+        [CallerArgumentExpression("collection")] string? paramName = null)
     {
-        if (items is null)
+        if (collection is null)
         {
             throw new ArgumentNullException(paramName);
         }
 
-        if (!items.Any())
+        EnsureNotEmpty(collection, paramName);
+    }
+
+    /// <summary>
+    ///   Throws if <paramref name="value"/> is either <see langword="null"/> or empty.
+    /// </summary>
+    /// <exception cref="ArgumentNullException">If <paramref name="value"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If <paramref name="value"/> is empty.</exception>
+    [MethodImpl(AggressiveInlining)]
+    public static void AssertNotNullOrEmpty(
+#if !NULLABLE_ATTRIBUTES_DISABLE
+        [NotNull]
+#endif // NULLABLE_ATTRIBUTES_DISABLE
+        this string? value,
+        [CallerArgumentExpression("value")] string? paramName = null)
+    {
+        if (value is null)
         {
-            throw new ArgumentException($"{(items is string ? "String" : "Collection")} must not be empty.", paramName);
+            throw new ArgumentNullException(paramName);
+        }
+
+        if (value.Length == 0)
+        {
+            throw new ArgumentException("String must not be empty.", paramName);
+        }
+    }
+
+    private static void EnsureNotEmpty(IEnumerable collection, string? paramName)
+    {
+        if (collection is ICollection c)
+        {
+            if (c.Count == 0)
+            {
+                throw new ArgumentException("Collection must not be empty.", paramName);
+            }
+
+            return;
+        }
+
+        var e = collection.GetEnumerator();
+        try
+        {
+            if (!e.MoveNext())
+            {
+                throw new ArgumentException("Collection must not be empty.", paramName);
+            }
+        }
+        finally
+        {
+            (e as IDisposable)?.Dispose();
         }
     }
 
@@ -372,193 +324,118 @@ static class _Check
     // ItemsNotNull ////////////////////
 
     /// <summary>
-    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
+    ///   Throws if either <paramref name="collection"/> or any element contained is <see langword="null"/>.
     /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <returns>The <paramref name="items"/> unless it or any element contained is <see langword="null"/>.</returns>
+    /// <exception cref="ArgumentNullException">If <paramref name="collection"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If any element in <paramref name="collection"/> is <see langword="null"/>.</exception>
+    /// <returns>The <paramref name="collection"/> unless it or any element contained is <see langword="null"/>.</returns>
     [MethodImpl(AggressiveInlining)]
-    public static IEnumerable<T> CheckItemsNotNull<T>(
+    public static TCollection CheckItemsNotNull<TCollection>(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IEnumerable<T>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
-        where T : class
+        this TCollection? collection,
+        [CallerArgumentExpression("collection")] string? paramName = null)
+        where TCollection : IEnumerable
     {
-        if (items is null)
+        if (collection is null)
         {
             throw new ArgumentNullException(paramName);
         }
 
-        if (items.Any(x => x is null))
+        foreach (object? item in collection)
         {
-            throw new ArgumentException("Collection must not contain any null items.", paramName);
+            if (item is null)
+            {
+                throw new ArgumentException("Collection must not contain any null items.", paramName);
+            }
         }
 
-        return items;
+        return collection;
     }
 
     /// <summary>
-    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
+    ///   Throws if either <paramref name="collection"/> or any element contained is <see langword="null"/>.
     /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <returns>The <paramref name="items"/> unless it or any element contained is <see langword="null"/>.</returns>
+    /// <exception cref="ArgumentNullException">If <paramref name="collection"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If any element in <paramref name="collection"/> is <see langword="null"/>.</exception>
     [MethodImpl(AggressiveInlining)]
-    public static IReadOnlyCollection<T> CheckItemsNotNull<T>(
+    public static void AssertItemsNotNull(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IReadOnlyCollection<T>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
-        where T : class
+        this IEnumerable? collection,
+        [CallerArgumentExpression("collection")] string? paramName = null)
     {
-        if (items is null)
+        if (collection is null)
         {
             throw new ArgumentNullException(paramName);
         }
 
-        if (items.Any(x => x is null))
+        foreach (object? item in collection)
         {
-            throw new ArgumentException("Collection must not contain any null items.", paramName);
-        }
-
-        return items;
-    }
-
-    /// <summary>
-    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
-    /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <returns>The <paramref name="items"/> unless it or any element contained is <see langword="null"/>.</returns>
-    [MethodImpl(AggressiveInlining)]
-    public static IReadOnlyList<T> CheckItemsNotNull<T>(
-#if !NULLABLE_ATTRIBUTES_DISABLE
-        [NotNull]
-#endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IReadOnlyList<T>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
-        where T : class
-    {
-        if (items is null)
-        {
-            throw new ArgumentNullException(paramName);
-        }
-
-        if (items.Any(x => x is null))
-        {
-            throw new ArgumentException("Collection must not contain any null items.", paramName);
-        }
-
-        return items;
-    }
-
-#if NET5_0_OR_GREATER
-    /// <summary>
-    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
-    /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <returns>The <paramref name="items"/> unless it or any element contained is <see langword="null"/>.</returns>
-    [MethodImpl(AggressiveInlining)]
-    public static IReadOnlySet<T> CheckItemsNotNull<T>(
-#if !NULLABLE_ATTRIBUTES_DISABLE
-        [NotNull]
-#endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IReadOnlySet<T>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
-        where T : class
-    {
-        if (items is null)
-        {
-            throw new ArgumentNullException(paramName);
-        }
-
-        if (items.Any(x => x is null))
-        {
-            throw new ArgumentException("Collection must not contain any null items.", paramName);
-        }
-
-        return items;
-    }
-#endif // NET5_0_OR_GREATER
-
-    /// <summary>
-    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/>.
-    /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/>.</exception>
-    [MethodImpl(AggressiveInlining)]
-    public static void AssertItemsNotNull<T>(
-#if !NULLABLE_ATTRIBUTES_DISABLE
-        [NotNull]
-#endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IEnumerable<T>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
-        where T : class
-    {
-        if (items is null)
-        {
-            throw new ArgumentNullException(paramName);
-        }
-
-        if (items.Any(x => x is null))
-        {
-            throw new ArgumentException("Collection must not contain any null items.", paramName);
+            if (item is null)
+            {
+                throw new ArgumentException("Collection must not contain any null items.", paramName);
+            }
         }
     }
 
     // ItemsNotNullOrEmpty ////////////////////
 
     /// <summary>
-    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/> or empty.
+    ///   Throws if either <paramref name="collection"/> or any string contained is <see langword="null"/> or empty.
     /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/> or empty.</exception>
+    /// <exception cref="ArgumentNullException">If <paramref name="collection"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If any string in <paramref name="collection"/> is <see langword="null"/> or empty.</exception>
     [MethodImpl(AggressiveInlining)]
     public static void AssertItemsNotNullOrEmpty(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IEnumerable<string?>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
+        this IEnumerable<string?>? collection,
+        [CallerArgumentExpression("collection")] string? paramName = null)
     {
-        if (items is null)
+        if (collection is null)
         {
             throw new ArgumentNullException(paramName);
         }
 
-        if (items.Any(string.IsNullOrEmpty))
+        foreach (var item in collection)
         {
-            throw new ArgumentException("Collection must not contain any null or empty strings.", paramName);
+            if (string.IsNullOrEmpty(item))
+            {
+                throw new ArgumentException("Collection must not contain any null or empty strings.", paramName);
+            }
         }
     }
 
     // ItemsNotNullOrWhiteSpace ////////////////////
 
     /// <summary>
-    ///   Throws if either <paramref name="items"/> or any element contained is <see langword="null"/> or white space.
+    ///   Throws if either <paramref name="collection"/> or any string contained is <see langword="null"/> or white space.
     /// </summary>
-    /// <exception cref="ArgumentNullException">If <paramref name="items"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException">If any element in <paramref name="items"/> is <see langword="null"/> or white space.</exception>
+    /// <exception cref="ArgumentNullException">If <paramref name="collection"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">If any string in <paramref name="collection"/> is <see langword="null"/> or white space.</exception>
     [MethodImpl(AggressiveInlining)]
     public static void AssertItemsNotNullOrWhiteSpace(
 #if !NULLABLE_ATTRIBUTES_DISABLE
         [NotNull]
 #endif // NULLABLE_ATTRIBUTES_DISABLE
-        this IEnumerable<string?>? items,
-        [CallerArgumentExpression("items")] string? paramName = null)
+        this IEnumerable<string?>? collection,
+        [CallerArgumentExpression("collection")] string? paramName = null)
     {
-        if (items is null)
+        if (collection is null)
         {
             throw new ArgumentNullException(paramName);
         }
 
-        if (items.Any(string.IsNullOrWhiteSpace))
+        foreach (var item in collection)
         {
-            throw new ArgumentException("Collection must not contain any null or white space strings.", paramName);
+            if (string.IsNullOrWhiteSpace(item))
+            {
+                throw new ArgumentException("Collection must not contain any null or white space strings.", paramName);
+            }
         }
     }
 
