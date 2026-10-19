@@ -4,7 +4,7 @@ call :clean
 echo.
 
 echo pack projects
-dotnet build aqua.tool.Validation -c Release
+dotnet build src/aqua.tool.Validation -c Release
 echo.
 
 ::echo pack nuspec files

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+  <Import Project="$(MSBuildThisFileDirectory)../$(MSBuildThisFile)" />
+  
+  <PropertyGroup>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <!--
+  Unit test settings
+  -->
+  <PropertyGroup Condition=" $(MSBuildProjectName.EndsWith('.Tests')) ">
+    <OutputType>Exe</OutputType>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+  </PropertyGroup>
+
+  <!--
+  Unit test global namespace imports
+  -->
+  <ItemGroup Condition=" $(MSBuildProjectName.EndsWith('.Tests')) And '$(SuppressGlobalUsings)' != 'true' ">
+    <Using Include="Shouldly" Global="true" />
+    <Using Include="System" Global="true" />
+    <Using Include="System.Collections" Global="true" />
+    <Using Include="System.Collections.Generic" Global="true" />
+    <Using Include="Xunit" Global="true" />
+  </ItemGroup>
+
+  <!--
+  Unit test runner config
+  -->
+  <ItemGroup Condition=" $(MSBuildProjectName.EndsWith('.Tests')) ">
+    <Content Include="$(MSBuildThisFileDirectory)../xunit.runner.json" Condition=" Exists('$(MSBuildThisFileDirectory)../xunit.runner.json')" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!--
+  Unit test packages
+  -->
+  <ItemGroup Condition=" $(MSBuildProjectName.EndsWith('.Tests')) ">
+    <PackageReference Include="coverlet.MTP" />
+    <PackageReference Include="Microsoft.Testing.Extensions.TrxReport" />
+    <PackageReference Include="Shouldly" />
+    <PackageReference Include="xunit.v3.mtp-v2" />
+  </ItemGroup>
+
+</Project>
