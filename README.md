@@ -2,9 +2,9 @@
 [![GitHub license][lic-badge]][lic-link]
 [![Github Workflow][pub-badge]][pub-link]
 
-| package                | doc                                      | nuget                  | myget                        |
-| :---                   | :---                                     | :---                   | :---                         |
-| `aqua.tool.Validation` | [readme](aqua.tool.Validation/README.md) | [![NuGet Badge][3]][4] | [![MyGet Pre Release][5]][6] |
+| package                | doc                                          | nuget                  | myget                        |
+| :---                   | :---                                         | :---                   | :---                         |
+| `aqua.tool.Validation` | [readme](src/aqua.tool.Validation/README.md) | [![NuGet Badge][3]][4] | [![MyGet Pre Release][5]][6] |
 
 # aqua-tools v4
 
