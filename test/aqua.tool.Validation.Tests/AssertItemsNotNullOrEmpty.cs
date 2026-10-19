@@ -21,6 +21,15 @@ public class AssertItemsNotNullOrEmpty
     }
 
     [Fact]
+    public void WithCollectionContainingNull_ThrowsArgumentException()
+    {
+        IEnumerable<string?> collection = ["x", null];
+
+        Should.Throw<ArgumentException>(() => collection.AssertItemsNotNullOrEmpty())
+            .ParamName.ShouldBe("collection");
+    }
+
+    [Fact]
     public void WithValidCollection_DoesNotThrow()
     {
         IEnumerable<string?> collection = ["x", "y"];

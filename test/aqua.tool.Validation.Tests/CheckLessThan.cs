@@ -26,6 +26,15 @@ public class CheckLessThan
     }
 
     [Fact]
+    public void WithGreaterInvalidValue_ThrowsArgumentOutOfRangeException()
+    {
+        int? value = 2;
+
+        Should.Throw<ArgumentOutOfRangeException>(() => value.CheckLessThan(1))
+            .ParamName.ShouldBe("value");
+    }
+
+    [Fact]
     public void WithNullValue_ThrowsArgumentNullException()
     {
         int? value = null;

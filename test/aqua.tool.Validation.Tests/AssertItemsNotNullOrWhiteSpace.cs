@@ -21,6 +21,24 @@ public class AssertItemsNotNullOrWhiteSpace
     }
 
     [Fact]
+    public void WithCollectionContainingEmptyString_ThrowsArgumentException()
+    {
+        IEnumerable<string?> collection = ["x", ""];
+
+        Should.Throw<ArgumentException>(() => collection.AssertItemsNotNullOrWhiteSpace())
+            .ParamName.ShouldBe("collection");
+    }
+
+    [Fact]
+    public void WithCollectionContainingNull_ThrowsArgumentException()
+    {
+        IEnumerable<string?> collection = ["x", null];
+
+        Should.Throw<ArgumentException>(() => collection.AssertItemsNotNullOrWhiteSpace())
+            .ParamName.ShouldBe("collection");
+    }
+
+    [Fact]
     public void WithValidCollection_DoesNotThrow()
     {
         IEnumerable<string?> collection = ["x", "y"];

@@ -3,6 +3,15 @@ namespace aqua.tool.Validation.Tests;
 public class AssertNotNullOrEmpty
 {
     [Fact]
+    public void WithEnumerableNull_ThrowsArgumentNullException()
+    {
+        IEnumerable? collection = null;
+
+        Should.Throw<ArgumentNullException>(() => collection.AssertNotNullOrEmpty())
+            .ParamName.ShouldBe("collection");
+    }
+
+    [Fact]
     public void WithEnumerableUsesSlowPath()
     {
         IEnumerable empty = Iterator(hasItem: false);
@@ -38,5 +47,13 @@ public class AssertNotNullOrEmpty
 
         Should.Throw<ArgumentException>(() => value.AssertNotNullOrEmpty())
             .ParamName.ShouldBe("value");
+    }
+
+    [Fact]
+    public void WithStringValue_DoesNotThrow()
+    {
+        const string value = "x";
+
+        value.AssertNotNullOrEmpty();
     }
 }

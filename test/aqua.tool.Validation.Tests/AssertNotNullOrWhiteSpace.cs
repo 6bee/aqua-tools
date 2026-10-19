@@ -1,4 +1,4 @@
-﻿namespace aqua.tool.Validation.Tests;
+namespace aqua.tool.Validation.Tests;
 
 public class AssertNotNullOrWhiteSpace
 {
@@ -15,6 +15,15 @@ public class AssertNotNullOrWhiteSpace
     public void WithWhitespace_ThrowsArgumentException()
     {
         const string value = "  ";
+
+        Should.Throw<ArgumentException>(() => value.AssertNotNullOrWhiteSpace())
+            .ParamName.ShouldBe("value");
+    }
+
+    [Fact]
+    public void WithEmpty_ThrowsArgumentException()
+    {
+        const string value = "";
 
         Should.Throw<ArgumentException>(() => value.AssertNotNullOrWhiteSpace())
             .ParamName.ShouldBe("value");

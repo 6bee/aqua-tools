@@ -26,6 +26,15 @@ public class AssertLessThan
     }
 
     [Fact]
+    public void WithGreaterInvalidValue_ThrowsArgumentOutOfRangeException()
+    {
+        int? value = 2;
+
+        Should.Throw<ArgumentOutOfRangeException>(() => value.AssertLessThan(1))
+            .ParamName.ShouldBe("value");
+    }
+
+    [Fact]
     public void WithNullValue_ThrowsArgumentNullException()
     {
         int? value = null;

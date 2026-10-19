@@ -21,6 +21,15 @@ public class CheckNotNullOrWhiteSpace
     }
 
     [Fact]
+    public void WithEmpty_ThrowsArgumentException()
+    {
+        const string value = "";
+
+        Should.Throw<ArgumentException>(() => value.CheckNotNullOrWhiteSpace())
+            .ParamName.ShouldBe("value");
+    }
+
+    [Fact]
     public void WithValue_ReturnsValue()
     {
         const string value = "x";
